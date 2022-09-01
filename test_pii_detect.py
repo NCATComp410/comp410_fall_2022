@@ -19,7 +19,7 @@ class Comp410TestCase(unittest.TestCase):
         self.assertTrue(has_aggie, 'No Aggie slogans found')
 
         # make sure the list has the expected number of slogans
-        self.assertEqual(2, len(result_list), 'Unexpected number of slogans')
+        self.assertEqual(3, len(result_list), 'Unexpected number of slogans')
 
     def test_ap_ww(self):
         # make sure each slogan is in the expected position
@@ -27,12 +27,18 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[0], 'Aggie Pride - Worldwide')
 
+    def test_aggies_go(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[2], 'Go Aggies')
+        
     def test_aggie_do(self):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[1], 'Aggies Do!')
-
+        
 
 if __name__ == '__main__':
     unittest.main()
