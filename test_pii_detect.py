@@ -31,7 +31,7 @@ class Comp410TestCase(unittest.TestCase):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[1], 'Go Aggies')
+        self.assertEqual(result_list[2], 'Go Aggies')
         
     def test_aggie_do(self):
         # make sure each slogan is in the expected position
