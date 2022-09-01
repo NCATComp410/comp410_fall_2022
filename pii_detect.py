@@ -1,4 +1,4 @@
-def show_aggie_pride():
+def show_aggie_pride() -> list:
     """Returns a list of favorite aggie slogans"""
     # python lists
     # https://developers.google.com/edu/python/lists
