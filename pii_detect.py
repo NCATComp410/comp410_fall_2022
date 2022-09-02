@@ -4,7 +4,8 @@ def show_aggie_pride() -> list:
     # https://developers.google.com/edu/python/lists
     slogan_list = ['Aggie Pride - Worldwide',
                    'Aggies Do!',
-                   'Go Aggies']
+                   'Go Aggies', 
+                   'We are Aggies!']
 
     return slogan_list
 
