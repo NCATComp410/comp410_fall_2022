@@ -74,5 +74,6 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[6], 'Lets Go Aggies!')
 
+
 if __name__ == '__main__':
     unittest.main()
