@@ -56,7 +56,10 @@ class Comp410TestCase(unittest.TestCase):
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[5], 'Thats What Aggies Do!')
-        
+
+    def test_letsgoaggies(self):
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[6], 'Lets Go Aggies!')
 
 if __name__ == '__main__':
     unittest.main()
