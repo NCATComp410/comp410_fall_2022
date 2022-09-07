@@ -50,7 +50,8 @@ class Comp410TestCase(unittest.TestCase):
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[4], 'Thats on 1891!')
-    def whataggiesdo(self):
+    
+    def test_whataggiesdo(self):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
