@@ -19,7 +19,7 @@ class Comp410TestCase(unittest.TestCase):
         self.assertTrue(has_aggie, 'No Aggie slogans found')
 
         # make sure the list has the expected number of slogans
-        self.assertEqual(2, len(result_list), 'Unexpected number of slogans')
+        self.assertEqual(7, len(result_list), 'Unexpected number of slogans')
 
     def test_ap_ww(self):
         # make sure each slogan is in the expected position
@@ -27,11 +27,41 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[0], 'Aggie Pride - Worldwide')
 
+    def test_aggie_do(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[1], 'Aggies Do!')
+
+    def test_aggies_go(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[2], 'Go Aggies')
+
+    def test_aggie_proud(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[3], 'We are Aggies!')
+
+    def thats_on_1891(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[4], 'Thats on 1891!')
+
+    def test_whataggiesdo(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[5], 'Thats What Aggies Do!')
+
     def test_aggies_skate(self):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[1], 'Aggies skate, Aggies grind!')
+        self.assertEqual(result_list[6], 'Aggies skate, Aggies grind!')
 
 
 if __name__ == '__main__':
