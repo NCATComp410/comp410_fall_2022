@@ -1,4 +1,5 @@
 import unittest
+import re
 from pii_detect import show_aggie_pride
 
 
@@ -20,6 +21,18 @@ class Comp410TestCase(unittest.TestCase):
 
         # make sure the list has the expected number of slogans
         self.assertEqual(7, len(result_list), 'Unexpected number of slogans')
+
+    def test_starts_with_test(self):
+        # In order to run as a test case the method name must start with test
+        # This test checks to make sure all defines within this file start with test
+        # This is a common mistake that can cause tests to be skipped
+        with open('test_pii_detect.py') as f:
+            for line in f:
+                # make sure everything that looks like a method name starts with test
+                m = re.search(r'\s*def (\w+)', line)
+                if m:
+                    self.assertTrue(m.group(1).startswith('test'),
+                                    'Method name does not start with test: def ' + m.group(1))
 
     def test_ap_ww(self):
         # make sure each slogan is in the expected position
@@ -45,7 +58,7 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[3], 'We are Aggies!')
 
-    def thats_on_1891(self):
+    def test_thats_on_1891(self):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
@@ -57,11 +70,15 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[5], 'Thats What Aggies Do!')
 
+    def test_letsgoaggies(self):
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[6], 'Lets Go Aggies!')
+
     def test_aggies_skate(self):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[6], 'Aggies skate, Aggies grind!')
+        self.assertEqual(result_list[7], 'Aggies skate, Aggies grind!') 
 
 
 if __name__ == '__main__':
