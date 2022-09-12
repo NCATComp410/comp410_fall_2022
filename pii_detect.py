@@ -1,5 +1,5 @@
 def show_aggie_pride():
-    slogan_list = ['Aggie Pride - Worldwide']
+    slogan_list = ['Aggie Pride - Worldwide', 'Aggies DO']
 
     return slogan_list
 
