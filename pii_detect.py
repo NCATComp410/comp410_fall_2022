@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-def show_aggie_pride():
-    slogan_list = ['Aggie Pride - Worldwide', 'Aggies DO']
-=======
 def show_aggie_pride() -> list:
     """Returns a list of favorite aggie slogans"""
     # python lists
@@ -14,7 +10,6 @@ def show_aggie_pride() -> list:
                    'Thats What Aggies Do!',
                    'Lets Go Aggies!',
                    'Aggies skate, Aggies grind!',]
->>>>>>> 442beeb9207e8d66a6ff75fa8378c0d7b4c3a553
 
     return slogan_list
 
