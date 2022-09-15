@@ -11,7 +11,7 @@ def show_aggie_pride() -> list:
                    'Lets Go Aggies!',
                    'Aggies skate, Aggies grind!',
                    'Show em what Aggies do',
-                   'I like my A in front of my G, in front of my G, in front of my I, in front of my E. Aggie Pride']
+                   'Aggies stick together']
 
 
     return slogan_list
