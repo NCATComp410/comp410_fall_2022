@@ -93,6 +93,11 @@ class Comp410TestCase(unittest.TestCase):
         self.assertEqual(result_list[9], 'Aggies stick together')
 
 
+    def test_aggie_born(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[9], 'Aggie born, Aggie bred')
 
 if __name__ == '__main__':
     unittest.main()
