@@ -12,8 +12,12 @@ def show_aggie_pride() -> list:
                    'Aggies skate, Aggies grind!',
                    'Show em what Aggies do',
                    'Aggie born, Aggie bred',
+<<<<<<< Updated upstream
                    'Aggies stick together']
 
+=======
+                   'Never Ever Underestimate An Aggie. Move Forward With Purpose.']
+>>>>>>> Stashed changes
 
     return slogan_list
 

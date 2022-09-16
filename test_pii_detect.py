@@ -93,6 +93,7 @@ class Comp410TestCase(unittest.TestCase):
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[9], 'Aggie born, Aggie bred')
+<<<<<<< Updated upstream
 
     def test_aggies_stick(self):
         # make sure each slogan is in the expected position
@@ -100,5 +101,12 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[10], 'Aggies stick together')
         
+=======
+    def test_NeverUnderestimate_MoveForward(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[10], 'Never Ever Underestimate An Aggie. Move Forward With Purpose.')
+>>>>>>> Stashed changes
 if __name__ == '__main__':
     unittest.main()
