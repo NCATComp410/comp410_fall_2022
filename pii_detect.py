@@ -9,9 +9,13 @@ def show_aggie_pride() -> list:
                    'Thats on 1891!',
                    'Thats What Aggies Do!',
                    'Lets Go Aggies!',
-                   'Aggies skate, Aggies grind!',]
+                   'Aggies skate, Aggies grind!'
+                   'Go Aggie Pride!',]
 
     return slogan_list
 
 if __name__ == '__main__':
+ def test_ap_ww(self):
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[8], 'Go Aggie Pride!')
     print(show_aggie_pride())
