@@ -42,7 +42,7 @@ class Comp410TestCase(unittest.TestCase):
     
     def new_aggie_slogan(self):
        result_list = show_aggie_pride()
-       self.assertEqual(result_list[8], 'Go Aggie Pride!')
+       self.assertEqual(result_list[13], 'Go Aggie Pride!')
 
     def test_aggie_do(self):
         # make sure each slogan is in the expected position
