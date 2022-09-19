@@ -10,12 +10,17 @@ def show_aggie_pride() -> list:
                    'Thats What Aggies Do!',
                    'Lets Go Aggies!',
                    'Aggies skate, Aggies grind!'
-                   'Go Aggie Pride!',]
+                   'Go Aggie Pride!'     
+                   'Show em what Aggies do',
+                   'Aggie born, Aggie bred',
+                   'Aggies stick together',
+                   'Never Ever Underestimate An Aggie. Move Forward With Purpose.']
+                   
 
     return slogan_list
 
 if __name__ == '__main__':
  def test_ap_ww(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[8], 'Go Aggie Pride!')
+        self.assertEqual(result_list[9], 'Go Aggie Pride!')
     print(show_aggie_pride())
