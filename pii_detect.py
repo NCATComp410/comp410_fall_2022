@@ -20,7 +20,4 @@ def show_aggie_pride() -> list:
     return slogan_list
 
 if __name__ == '__main__':
- def test_ap_ww(self):
-        result_list = show_aggie_pride()
-        self.assertEqual(result_list[9], 'Go Aggie Pride!')
     print(show_aggie_pride())
