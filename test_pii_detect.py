@@ -105,5 +105,12 @@ class Comp410TestCase(unittest.TestCase):
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[11], 'Never Ever Underestimate An Aggie. Move Forward With Purpose.')
+        
+     def test_Aggie_National(self):
+         # make sure each slogan is in the expected position
+         # merge errors are a common reason for failures
+         result_list = show_aggie_pride()
+         self.assertEqual(result_list[12], 'Aggie Nation!')
+        
 if __name__ == '__main__':
     unittest.main()
