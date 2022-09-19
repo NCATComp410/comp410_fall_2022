@@ -36,13 +36,9 @@ class Comp410TestCase(unittest.TestCase):
 
     def test_ap_ww(self):
         # make sure each slogan is in the expected position
-         # merge errors are a common reason for failures
+        # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[0], 'Aggie Pride - Worldwide')
-    
-    def new_aggie_slogan(self):
-       result_list = show_aggie_pride()
-       self.assertEqual(result_list[13], 'Go Aggie Pride!')
 
     def test_aggie_do(self):
         # make sure each slogan is in the expected position
@@ -115,6 +111,11 @@ class Comp410TestCase(unittest.TestCase):
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[12], 'Aggie For Life!')
+        
+        
+    def new_aggie_slogan(self):
+       result_list = show_aggie_pride()
+       self.assertEqual(result_list[13], 'Go Aggie Pride!')
         
 if __name__ == '__main__':
     unittest.main()
