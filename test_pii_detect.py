@@ -113,7 +113,7 @@ class Comp410TestCase(unittest.TestCase):
         self.assertEqual(result_list[12], 'Aggie For Life!')
         
         
-    def new_aggie_slogan(self):
+    def test_new_aggie_slogan(self):
        result_list = show_aggie_pride()
        self.assertEqual(result_list[13], 'Go Aggie Pride!')
         
