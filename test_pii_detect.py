@@ -27,6 +27,12 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[0], 'Aggie Pride - Worldwide')
 
+    def test_my_slogan(self):
+            result_list = show_aggie_pride()
+            self.assertEqual(result_list[14], 'A.G.G.I.E what!')
+
 
 if __name__ == '__main__':
     unittest.main()
+
+
