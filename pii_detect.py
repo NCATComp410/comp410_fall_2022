@@ -15,7 +15,7 @@ def show_aggie_pride() -> list:
                    'Aggies stick together',
                    'Never Ever Underestimate An Aggie. Move Forward With Purpose.',
                    'Aggies rock', 
-                   'A.G.G.I.E what!']
+                   'A G G I E what!']
 
     return slogan_list
 
