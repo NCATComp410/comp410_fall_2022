@@ -114,6 +114,8 @@ class Comp410TestCase(unittest.TestCase):
         self.assertEqual(result_list[12], 'Aggies rock')
         
     def test_my_slogan(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[13], 'A.G.G.I.E what!')
 
