@@ -122,7 +122,7 @@ class Comp410TestCase(unittest.TestCase):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[14], 'Aggie Nation!')
+        self.assertEqual(result_list[15], 'Aggie Nation!')
 
         
 if __name__ == '__main__':
