@@ -3,10 +3,21 @@ def show_aggie_pride() -> list:
     # python lists
     # https://developers.google.com/edu/python/lists
     slogan_list = ['Aggie Pride - Worldwide',
-    'A.G.G.I.E what!']
+                   'Aggies Do!',
+                   'Go Aggies',
+                   'We are Aggies!',
+                   'Thats on 1891!',
+                   'Thats What Aggies Do!',
+                   'Lets Go Aggies!',
+                   'Aggies skate, Aggies grind!',
+                   'Show em what Aggies do',
+                   'Aggie born, Aggie bred',
+                   'Aggies stick together',
+                   'Never Ever Underestimate An Aggie. Move Forward With Purpose.',
+                   'Aggies rock', 
+                   'A G G I E what!']
 
     return slogan_list
-
 
 if __name__ == '__main__':
     print(show_aggie_pride())
