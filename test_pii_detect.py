@@ -20,7 +20,7 @@ class Comp410TestCase(unittest.TestCase):
         self.assertTrue(has_aggie, 'No Aggie slogans found')
 
         # make sure the list has the expected number of slogans
-        self.assertEqual(20, len(result_list), 'Unexpected number of slogans')
+        self.assertEqual(21, len(result_list), 'Unexpected number of slogans')
 
     def test_starts_with_test(self):
         # In order to run as a test case the method name must start with test
@@ -148,7 +148,7 @@ class Comp410TestCase(unittest.TestCase):
         
     def test_aggies_periodt_ahh(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[18], 'Aggies are periodt ahh, Eagles are periodt ugh')
+        self.assertEqual(result_list[20], 'Aggies are periodt ahh, Eagles are periodt ugh')
 
 
                                                                                                                               
