@@ -19,7 +19,7 @@ def show_aggie_pride() -> list:
                    'Aggie Nation!',
                    'Aggies Achieve!',
                    'Aggies rock',
-                   'Aggies think, Aggies do!']
+                   'Aggies think, Aggies do!',]
 
     return slogan_list
 
