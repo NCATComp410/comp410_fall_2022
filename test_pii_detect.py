@@ -21,7 +21,7 @@ class Comp410TestCase(unittest.TestCase):
 
         # make sure the list has the expected number of slogans
 
-        self.assertEqual(20, len(result_list), 'Unexpected number of slogans')
+        self.assertEqual(18, len(result_list), 'Unexpected number of slogans')
 
     def test_starts_with_test(self):
         # In order to run as a test case the method name must start with test
