@@ -20,7 +20,8 @@ def show_aggie_pride() -> list:
                    'Aggies Achieve!',
                    'Aggies Go!',
                    'Aggie what? Pride what give me that, give me that',
-                   'Aggies are periodt ahh, Eagles are periodt ugh']
+                   'Aggies are periodt ahh, Eagles are periodt ugh',
+                   'Aggies Learn']
 
     return slogan_list
 
