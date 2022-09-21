@@ -1,4 +1,5 @@
 import unittest
+import re
 from pii_detect import show_aggie_pride
 
 
