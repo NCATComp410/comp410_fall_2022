@@ -21,7 +21,7 @@ class Comp410TestCase(unittest.TestCase):
 
         # make sure the list has the expected number of slogans
 
-        self.assertEqual(18, len(result_list), 'Unexpected number of slogans')
+        self.assertEqual(19, len(result_list), 'Unexpected number of slogans')
 
     def test_starts_with_test(self):
         # In order to run as a test case the method name must start with test
@@ -130,15 +130,21 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[15], 'Aggies Achieve!')
         
+    def test_Aggie_Achieve(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[16], 'Aggies Go!')
+      
     def test_my_slogan(self):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[16], 'A.G.G.I.E what!')
+        self.assertEqual(result_list[17], 'A.G.G.I.E what!')
 
     def test_aggie_what_pride_what(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[17], 'Aggie what? Pride what give me that, give me that')
+        self.assertEqual(result_list[18], 'Aggie what? Pride what give me that, give me that')
 
         
 if __name__ == '__main__':
