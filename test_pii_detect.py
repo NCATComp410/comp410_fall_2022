@@ -128,11 +128,11 @@ class Comp410TestCase(unittest.TestCase):
 
     def test_aggie_what_pride_what(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[16], 'Aggie what? Pride what give me that, give me that')
+        self.assertEqual(result_list[17], 'Aggie what? Pride what give me that, give me that')
         
     def test_aggie_what_pride_what(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[17], 'A G G I E what!')
+        self.assertEqual(result_list[18], 'A G G I E what!')
 
         
 if __name__ == '__main__':
