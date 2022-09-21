@@ -106,12 +106,6 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[11], 'Never Ever Underestimate An Aggie. Move Forward With Purpose.')
 
-    def test_aggies_rock(self):
-        # make sure each slogan is in the expected position
-        # merge errors are a common reason for failures
-        result_list = show_aggie_pride()
-        self.assertEqual(result_list[12], 'Aggies rock')
-
     
     def test_Aggie_National(self):
         # make sure each slogan is in the expected position
@@ -124,6 +118,13 @@ class Comp410TestCase(unittest.TestCase):
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[15], 'Aggies Achieve!')
+
+    def test_aggies_rock(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[16], 'Aggies rock')
+
 
     def test_aggies_think_do(self):
         # make sure each slogan is in the expected position
