@@ -20,7 +20,7 @@ class Comp410TestCase(unittest.TestCase):
         self.assertTrue(has_aggie, 'No Aggie slogans found')
 
         # make sure the list has the expected number of slogans
-        self.assertEqual(14, len(result_list), 'Unexpected number of slogans')
+        self.assertEqual(18, len(result_list), 'Unexpected number of slogans')
 
     def test_starts_with_test(self):
         # In order to run as a test case the method name must start with test
@@ -105,18 +105,38 @@ class Comp410TestCase(unittest.TestCase):
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[11], 'Never Ever Underestimate An Aggie. Move Forward With Purpose.')
-
-    def test_aggies_rock(self):
+        
+    def test_aggie_for_life(self):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[12], 'Aggies rock')
+        self.assertEqual(result_list[12], 'Aggie For Life!')
+        
+        
+    def test_new_aggie_slogan(self):
+       result_list = show_aggie_pride()
+       self.assertEqual(result_list[13], 'Go Aggie Pride!')
 
-    def test_aggies_think_do(self):
+    
+    def test_Aggie_National(self):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[13], 'Aggies think, Aggies do!')
+        self.assertEqual(result_list[14], 'Aggie Nation!')
 
+    def test_Aggie_Achieve(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[15], 'Aggies Achieve!')
+
+    def test_aggie_what_pride_what(self):
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[17], 'Aggie what? Pride what give me that, give me that')
+
+
+
+
+        
 if __name__ == '__main__':
     unittest.main()
