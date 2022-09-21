@@ -141,9 +141,9 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[17], 'Aggie what? Pride what give me that, give me that')
 
-    def test_aggie_what_pride_what(self):
+    def test_aggies_periodt_ahh(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[18], 'Aggies Rule, Eagles Drool')
+        self.assertEqual(result_list[18], 'Aggies are periodt ahh, Eagles are periodt ugh')
 
 
         
