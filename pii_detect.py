@@ -21,6 +21,7 @@ def show_aggie_pride() -> list:
                    'Aggies Go!',
                    'Aggie what? Pride what give me that, give me that',
                    'It\'s GHOE Babyyy!',
+                   'Aggies are periodt ahh, Eagles are periodt ugh',
                    'Aggies Rule, Eagles Drool',
                    'A G G I E what!',
                    'Aggies are periodt ahh, Eagles are periodt ugh']
