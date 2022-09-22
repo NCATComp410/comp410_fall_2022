@@ -20,7 +20,7 @@ class Comp410TestCase(unittest.TestCase):
         self.assertTrue(has_aggie, 'No Aggie slogans found')
 
         # make sure the list has the expected number of slogans
-        self.assertEqual(27, len(result_list), 'Unexpected number of slogans')
+        self.assertEqual(28, len(result_list), 'Unexpected number of slogans')
 
 
     def test_starts_with_test(self):
@@ -161,23 +161,23 @@ class Comp410TestCase(unittest.TestCase):
         
     def test_gig_em_aggie(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[23], 'Gig em, Aggies! Fight em, Aggies! Farmers fight!')
+        self.assertEqual(result_list[24], 'Gig em, Aggies! Fight em, Aggies! Farmers fight!')
 
     def test_aggie_dead(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[24], 'And when I die, I am Aggie Dead!')
+        self.assertEqual(result_list[25], 'And when I die, I am Aggie Dead!')
 
     def test_Aggies_learn(self):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[25], 'Aggies Learn')
+        self.assertEqual(result_list[26], 'Aggies Learn')
         
     def test_ILikeMy(self):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[26], 'Aggieee Prideee!')
+        self.assertEqual(result_list[27], 'Aggieee Prideee!')
 
 
 if __name__ == '__main__':
