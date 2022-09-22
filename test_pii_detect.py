@@ -153,6 +153,10 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[21], 'A G G I E what!')
 
+    def test_aggie_dead(self):
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[22], 'And when I die, I am Aggie Dead')
+
 
                                                                                                                               
 if __name__ == '__main__':
