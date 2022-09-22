@@ -26,7 +26,8 @@ def show_aggie_pride() -> list:
                    'Aggies Rule, Eagles Drool',
                    'A G G I E what!',
                    'Aggies are periodt ahh, Eagles are periodt ugh',
-                   'Gig em, Aggies! Fight em, Aggies! Farmers fight!']
+                   'Gig em, Aggies! Fight em, Aggies! Farmers fight!',
+                   'Aggies think, Aggies do!']
 
     return slogan_list
 
