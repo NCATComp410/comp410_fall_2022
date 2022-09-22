@@ -111,6 +111,13 @@ class Comp410TestCase(unittest.TestCase):
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[12], 'Aggies rock')
+        
+    def gig_em_aggies(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[13], 'Gig em, Aggies! Fight em, Aggies! Farmers fight!')
+
 
 if __name__ == '__main__':
     unittest.main()
