@@ -9,12 +9,23 @@ def show_aggie_pride() -> list:
                    'Thats on 1891!',
                    'Thats What Aggies Do!',
                    'Lets Go Aggies!',
-                   'Aggies skate, Aggies grind!',
+                   'Aggies skate, Aggies grind!',     
                    'Show em what Aggies do',
                    'Aggie born, Aggie bred',
                    'Aggies stick together',
                    'Never Ever Underestimate An Aggie. Move Forward With Purpose.',
-                   'Aggies rock'
+                   'Aggies rock',
+                   'Aggie For Life!',
+                   'Go Aggie Pride!', 
+                   'Aggie Nation!',
+                   'Aggies Achieve!',
+                   'Aggies Go!',
+                   'Aggie what? Pride what give me that, give me that',
+                   'It\'s GHOE Babyyy!',
+                   'Aggies are periodt ahh, Eagles are periodt ugh',
+                   'Aggies Rule, Eagles Drool',
+                   'A G G I E what!',
+                   'Aggies are periodt ahh, Eagles are periodt ugh',
                    'Gig em, Aggies! Fight em, Aggies! Farmers fight!']
 
     return slogan_list
