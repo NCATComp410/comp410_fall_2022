@@ -155,7 +155,7 @@ class Comp410TestCase(unittest.TestCase):
 
     def test_aggie_dead(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[22], 'And when I die, I am Aggie Dead')
+        self.assertEqual(result_list[22], 'And when I die, I am Aggie Dead!')
 
 
                                                                                                                               
