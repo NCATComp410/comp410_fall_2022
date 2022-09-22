@@ -20,7 +20,8 @@ class Comp410TestCase(unittest.TestCase):
         self.assertTrue(has_aggie, 'No Aggie slogans found')
 
         # make sure the list has the expected number of slogans
-        self.assertEqual(24, len(result_list), 'Unexpected number of slogans')
+        self.assertEqual(27, len(result_list), 'Unexpected number of slogans')
+
 
     def test_starts_with_test(self):
         # In order to run as a test case the method name must start with test
@@ -103,7 +104,7 @@ class Comp410TestCase(unittest.TestCase):
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[11], 'Never Ever Underestimate An Aggie. Move Forward With Purpose.')
-        
+
     def test_aggie_for_life(self):
         # make sure each slogan is in the expected position
         # merge errors are a common reason for failures
@@ -137,27 +138,47 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[17], 'Aggie what? Pride what give me that, give me that')
 
+    def test_aggies_periodt_ahh(self):
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[18], 'Aggies are periodt ahh, Eagles are periodt ugh')
+
     def test_its_ghoe_baby(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[18], 'It\'s GHOE Babyyy!')
+        self.assertEqual(result_list[19], 'It\'s GHOE Babyyy!')
 
     def test_aggies_periodt_ahh(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[19], 'Aggies are periodt ahh, Eagles are periodt ugh')
+        self.assertEqual(result_list[20], 'Aggies are periodt ahh, Eagles are periodt ugh')
+
 
     def test_aggies_rule(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[20], 'Aggies Rule, Eagles Drool')
+        self.assertEqual(result_list[21], 'Aggies Rule, Eagles Drool')
         
     def test_aggie_what(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[21], 'A G G I E what!')
+        self.assertEqual(result_list[22], 'A G G I E what!')
         
     def test_gig_em_aggie(self):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[23], 'Gig em, Aggies! Fight em, Aggies! Farmers fight!')
 
+    def test_aggie_dead(self):
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[24], 'And when I die, I am Aggie Dead!')
 
-                                                                                                                              
+    def test_Aggies_learn(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[25], 'Aggies Learn')
+        
+    def test_ILikeMy(self):
+        # make sure each slogan is in the expected position
+        # merge errors are a common reason for failures
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[26], 'Aggieee Prideee!')
+
+
 if __name__ == '__main__':
     unittest.main()
