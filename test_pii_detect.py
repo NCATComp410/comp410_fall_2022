@@ -21,7 +21,7 @@ class Comp410TestCase(unittest.TestCase):
 
         # make sure the list has the expected number of slogans
 
-        self.assertEqual(28, len(result_list), 'Unexpected number of slogans')
+        self.assertEqual(29, len(result_list), 'Unexpected number of slogans')
 
 
 
