@@ -123,6 +123,7 @@ class Comp410TestCase(unittest.TestCase):
         # merge errors are a common reason for failures
         result_list = show_aggie_pride()
         self.assertEqual(result_list[14] == 'Can I Get an Aggie Pride?')
+        
 
 if __name__ == '__main__':
     unittest.main()
