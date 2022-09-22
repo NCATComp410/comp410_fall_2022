@@ -155,7 +155,7 @@ class Comp410TestCase(unittest.TestCase):
         
     def test_aggie_what(self):
         result_list = show_aggie_pride()
-        self.assertEqual(result_list[22], 'Dont Underestimate an Aggie!')
+        self.assertEqual(result_list[23], 'Dont Underestimate an Aggie!')
 
 
                                                                                                                               
