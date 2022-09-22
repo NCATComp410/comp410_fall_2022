@@ -29,7 +29,8 @@ def show_aggie_pride() -> list:
                    'Gig em, Aggies! Fight em, Aggies! Farmers fight!',
                    'And when I die, I am Aggie Dead!',
                    'Aggies Learn',
-                  'Aggieee Prideee!']
+                  'Aggieee Prideee!',
+                  'Aggies Lead!']
 
     return slogan_list
 
