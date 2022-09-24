@@ -19,7 +19,7 @@ class Comp410TestCase(unittest.TestCase):
                 break
         self.assertTrue(has_aggie, 'No Aggie slogans found')
 
-        # make sure the list has the expected number of slogans
+        # make sure the list has the expected number of slogan
 
         self.assertEqual(29, len(result_list), 'Unexpected number of slogans')
 
@@ -160,6 +160,10 @@ class Comp410TestCase(unittest.TestCase):
     def test_aggie_what(self):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[22], 'A G G I E what!')
+    
+    def test_Aggie_PRIDE(self):
+        result_list = show_aggie_pride()
+        self.assertEqual(result_list[23], 'Aggie PRIDE!')
         
     def test_gig_em_aggie(self):
         result_list = show_aggie_pride()
@@ -188,6 +192,8 @@ class Comp410TestCase(unittest.TestCase):
         result_list = show_aggie_pride()
         self.assertEqual(result_list[28], 'Aggies Lead!')
 
+
+    
 
 
 if __name__ == '__main__':

@@ -25,7 +25,7 @@ def show_aggie_pride() -> list:
                    'Aggies are periodt ahh, Eagles are periodt ugh',
                    'Aggies Rule, Eagles Drool',
                    'A G G I E what!',
-                   'Aggies are periodt ahh, Eagles are periodt ugh',
+                   'Aggie PRIDE!',
                    'Gig em, Aggies! Fight em, Aggies! Farmers fight!',
                    'And when I die, I am Aggie Dead!',
                    'Aggies Learn',
