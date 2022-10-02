@@ -1,10 +1,16 @@
 import re
 
 
-def find_city_state(text):
+def find_city_state(text) -> list:
     """Finds all occurrences of a city and state abbreviation in a text string"""
     # match a one word or a two word city name followed by a comma and state abbreviation
     return re.findall(r'\b[A-Z][a-z]+(?: [A-Z][a-z]+)?, [A-Z]{2}\b', text)
+
+
+def find_account_number(text) -> list:
+    """Finds all occurrences of a bank account number in a text string"""
+    # match a 10 digit bank account number
+    return re.findall(r'\b\d{10}\b', text)
 
 
 def show_aggie_pride() -> list:
