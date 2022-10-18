@@ -37,6 +37,7 @@ class TeamFrostTests(unittest.TestCase):
     def test_find_us_ssn(self):
         results_list = find_us_ssn('My social security number is 123-45-6789')
         self.assertEqual(results_list[0], '123-45-6789')
+
         # tests with a SSN at the end of the string
         results_list = find_us_ssn('My social security number is 123-45-6789')
         self.assertEqual(results_list[0], '123-45-6789')
