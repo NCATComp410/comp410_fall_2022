@@ -22,7 +22,11 @@ def find_amex(text) -> list:
 def find_us_ssn(text) -> list:
     """Finds all occurrences of a US social security number in a text string"""
     # match a 9 digit social security number
-    return []
+    SSNRegex = re.compile(r'\d\d\d-\d\d-\d\d\d\d')
+    MO = SSNRegex.search(text)
+    result_list = []
+    result_list.append(MO.group())
+    return [result_list]
 
 
 def find_email(text) -> list:
