@@ -24,7 +24,7 @@ class TeamFrostTests(unittest.TestCase):
         #test an invalid phone number
         results_list = find_us_phone_number('1234567890 is my phone number')
         #result_list should be empty
-        self.assertFalse(results_list) 
+        self.assertFalse(results_list)
 
     def test_find_visa_mastercard(self):
         results_list = find_visa_mastercard('My credit card number is 1234-5678-9012-3456')
@@ -39,8 +39,9 @@ class TeamFrostTests(unittest.TestCase):
         self.assertEqual(results_list, [])
 
     def test_find_email(self):
-        results_list = find_email('My email address is jim.jones@jones.com')
-        self.assertEqual(results_list, [])
+        #test an email given at the end of string
+        results_list = find_email("My email address is jim.jones@jones.com")
+        self.assertEqual(results_list[0],'jim.jones@jones.com')
 
     def test_find_instagram_handle(self):
         results_list = find_instagram_handle('My instagram handle is @jimjones')
