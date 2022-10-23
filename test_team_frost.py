@@ -1,5 +1,5 @@
 import unittest
-from pii_team_frost import find_instagram_handle
+from pii_team_frost import *
 
 
 class TeamFrostTests(unittest.TestCase):
