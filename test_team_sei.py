@@ -24,8 +24,46 @@ class TeamFrostTests(unittest.TestCase):
         self.assertEqual(results_list, [])
 
     def test_find_instagram_handle(self):
-        results_list = find_instagram_handle('My instagram handle is @jimjones')
-        self.assertEqual(results_list, [])
+    
+        # Test an alphabetical token
+        result_list = find_instagram_handle('My instagram handle is @classicman')
+        self.assertEqual(result_list[0], '@classicman')
+
+        # Test a case-insensitive token
+        result_list = find_instagram_handle('My instagram handle is @ClassicMan')
+        self.assertEqual(result_list[0], '@ClassicMan')
+
+        # Test an alphanumeric token
+        result_list = find_instagram_handle('My instagram handle is @cl4ssicm4n')
+        self.assertEqual(result_list[0], '@cl4ssicm4n')
+
+        # Test token with an enclosed underscore
+        result_list = find_instagram_handle('My instagram handle is @classic_man')
+        self.assertEqual(result_list[0], '@classic_man')
+
+        # Test token with leading/trailing underscore(s)
+        result_list = find_instagram_handle('My instagram handle is @_classicman_')
+        self.assertEqual(result_list[0], '@_classicman_')
+
+        # Test token with an enclosed period
+        result_list = find_instagram_handle('My instagram handle is @classic.man')
+        self.assertEqual(result_list[0], '@classic.man')
+
+        # Test token with leading/trailing period(s)
+        result_list = find_instagram_handle('My instagram handle is @.classicman.')
+        self.assertEqual(result_list[0], '@.classicman.')
+
+        # Test a single account number
+        result_list = find_instagram_handle('My instagram handle is @_.classicman._')
+        self.assertEqual(result_list[0], '@_.classicman._')
+
+        # Test that emails do not match
+        result_list = find_instagram_handle('My email is classicman@outlook.com')
+        self.assertFalse(result_list)
+
+        # Test that no character can precede the handle
+        result_list = find_instagram_handle('My email is:@outlook.com')
+        self.assertFalse(result_list)
 
 
 if __name__ == '__main__':
