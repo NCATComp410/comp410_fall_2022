@@ -5,7 +5,7 @@ from pii_team_phantom import *
 class TeamFrostTests(unittest.TestCase):
     def test_find_us_phone_number(self):
         results_list = find_us_phone_number('My phone number is 123-456-7890')
-        self.assertEqual(results_list, '704-387-6122')
+        self.assertEqual(results_list, [])
 
     def test_find_visa_mastercard(self):
         results_list = find_visa_mastercard('My credit card number is 1234-5678-9012-3456')
