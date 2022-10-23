@@ -21,7 +21,7 @@ class TeamFrostTests(unittest.TestCase):
 
     def test_find_email(self):
         results_list = find_email('My email address is jim.jones@jones.com')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0],'jim.jones@jones.com')
 
     def test_find_instagram_handle(self):
         results_list = find_instagram_handle('My instagram handle is @jimjones')
