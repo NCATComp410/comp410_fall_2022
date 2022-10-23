@@ -14,9 +14,9 @@ class TeamFrostTests(unittest.TestCase):
         self.assertEqual(results_list[0], '123-456-7890')
             
         #test multiple phone numbers
-        results_list = find_us_phone_number('123-456-7890 is my phone number. Her number is 987-654-3210')
+        results_list = find_us_phone_number('123-456-7890 is my phone number. Her number is 919-684-3210')
         self.assertEqual(results_list[0], '123-456-7890')
-        self.assertEqual(results_list[1], '987-654-3210')
+        self.assertEqual(results_list[1], '919-684-3210')
         
         #test at the end of a string
         results_list = find_us_phone_number('My phone number is 123-456-7890')
