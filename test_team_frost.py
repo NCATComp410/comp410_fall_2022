@@ -1,5 +1,5 @@
 import unittest
-from pii_team_frost import *
+from pii_team_frost import find_instagram_handle
 
 
 class TeamFrostTests(unittest.TestCase):
@@ -24,9 +24,45 @@ class TeamFrostTests(unittest.TestCase):
         self.assertEqual(results_list, [])
 
     def test_find_instagram_handle(self):
-        results_list = find_instagram_handle('My instagram handle is @jimjones')
-        self.assertEqual(results_list, [])
+        # Test an alphabetical token
+        result_list = find_instagram_handle('My instagram handle is @masterchief')
+        self.assertEqual(result_list[0], '@masterchief')
 
+        # Test a case-insensitive token
+        result_list = find_instagram_handle('My instagram handle is @MasterChief')
+        self.assertEqual(result_list[0], '@MasterChief')
+
+        # Test an alphanumeric token
+        result_list = find_instagram_handle('My instagram handle is @m4st3rch1ef')
+        self.assertEqual(result_list[0], '@m4st3rch1ef')
+
+        # Test token with an enclosed underscore
+        result_list = find_instagram_handle('My instagram handle is @master_chief')
+        self.assertEqual(result_list[0], '@master_chief')
+
+        # Test token with leading/trailing underscore(s)
+        result_list = find_instagram_handle('My instagram handle is @_masterchief_')
+        self.assertEqual(result_list[0], '@_masterchief_')
+
+        # Test token with an enclosed period
+        result_list = find_instagram_handle('My instagram handle is @master.chief')
+        self.assertEqual(result_list[0], '@master.chief')
+
+        # Test token with leading/trailing period(s)
+        result_list = find_instagram_handle('My instagram handle is @.masterchief.')
+        self.assertEqual(result_list[0], '@.masterchief.')
+
+        # Test a single account number
+        result_list = find_instagram_handle('My instagram handle is @_.masterchief._')
+        self.assertEqual(result_list[0], '@_.masterchief._')
+
+        # Test that emails do not match
+        result_list = find_instagram_handle('My email is john117@outlook.com')
+        self.assertFalse(result_list)
+
+        # Test that no character can precede the handle
+        result_list = find_instagram_handle('My email is:@outlook.com')
+        self.assertFalse(result_list)
 
 if __name__ == '__main__':
     unittest.main()
