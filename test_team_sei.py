@@ -43,6 +43,7 @@ class TeamFrostTests(unittest.TestCase):
         #test invalid email
         results_list = find_email("My email address is jim.jones.com")
         self.assertFalse(results_list)
+        
     def test_find_instagram_handle(self):
         results_list = find_instagram_handle('My instagram handle is @jimjones')
         self.assertEqual(results_list, [])
