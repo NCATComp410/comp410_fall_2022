@@ -22,7 +22,27 @@ class TeamFrostTests(unittest.TestCase):
     def test_find_email(self):
         results_list = find_email('My email address is jim.jones@jones.com')
         self.assertEqual(results_list[0],'jim.jones@jones.com')
+     
+        #test an email given at the end of string
+        results_list = find_email("My email address is jim.jones@jones.com")
+        self.assertEqual(results_list[0],'jim.jones@jones.com')
 
+        #test an email given at the beginning of string
+        results_list = find_email("jim.jones@jones.com is my email")
+        self.assertEqual(results_list[0],'jim.jones@jones.com')
+
+        #test multiple emails given
+        results_list = find_email("My email address is jim.jones@jones.com , her's is sarahouston@gmail.com")
+        self.assertEqual(results_list[0],'jim.jones@jones.com')
+        self.assertEqual(results_list[1], 'mekaylamoore@gmail.com')
+
+        #test with new email address
+        results_list = find_email("My new email addrees is panthers89@yahoo.com")
+        self.assertEqual(results_list[0],'kaylam89@yahoo.com')
+
+        #test invalid email
+        results_list = find_email("My email address is jim.jones.com")
+        self.assertFalse(results_list)
     def test_find_instagram_handle(self):
         results_list = find_instagram_handle('My instagram handle is @jimjones')
         self.assertEqual(results_list, [])
