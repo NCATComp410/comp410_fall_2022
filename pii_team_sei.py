@@ -21,7 +21,13 @@ def find_amex(text) -> list:
 
 def find_us_ssn(text) -> list:
     """Finds all occurrences of a US social security number in a text string"""
-    # match a 9 digit social security number
+    SSN = raw_input("enter SSN (ddd-dd-dddd):")
+    chunks = SSN.split('-')
+    valid=False
+    if len(chunks) ==3: 
+     if len(chunks[0])==3 and len(chunks[1])==2 and len(chunks[2])==4:
+       valid=True
+    print valid
     return []
 
 
