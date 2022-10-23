@@ -17,7 +17,9 @@ def find_visa_mastercard(text) -> list:
 def find_amex(text) -> list:
     """Finds all occurrences of an amex number in a text string"""
     # match a 15 digit credit card number
-    return re.findall(r"[0-9]{4}[-][0-9]{6}[-][0-9]{5}", text)
+    regex = r"[0-9]{4}[-][0-9]{6}[-][0-9]{5}"
+
+    return re.findall(regex, text)
 
 
 
