@@ -10,7 +10,7 @@ class TeamFrostTests(unittest.TestCase):
     def test_find_visa_mastercard(self):
         #Not matching credit card number
         results_list = find_visa_mastercard('My credit card number is 1234-5678-9012-3456')
-        self.assertEqual(results_list[0], [])
+        self.assertEqual(results_list, [])
 
         #Matching Visa credit card number
         results_list = find_visa_mastercard('My credit card number is 4234-5678-9012-3456')
