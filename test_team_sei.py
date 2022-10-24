@@ -31,14 +31,9 @@ class TeamFrostTests(unittest.TestCase):
         results_list = find_email("jim.jones@jones.com is my email")
         self.assertEqual(results_list[0],'jim.jones@jones.com')
 
-        #test multiple emails given
-        results_list = find_email("My email address is jim.jones@jones.com , her's is sarahouston@gmail.com")
-        self.assertEqual(results_list[0],'jim.jones@jones.com')
-        self.assertEqual(results_list[1], 'mekaylamoore@gmail.com')
-
         #test with new email address
-        results_list = find_email("My new email addrees is panthers89@yahoo.com")
-        self.assertEqual(results_list[0],'kaylam89@yahoo.com')
+        results_list = find_email("My new email addrees is kaylam720@gmail.com")
+        self.assertEqual(results_list[0],'kaylam720@gmail.com')
 
         #test invalid email
         results_list = find_email("My email address is jim.jones.com")
