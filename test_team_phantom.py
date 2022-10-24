@@ -26,7 +26,17 @@ class TeamFrostTests(unittest.TestCase):
 
     def test_find_us_ssn(self):
         results_list = find_us_ssn('My social security number is 123-45-6789')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], '123-45-6789')
+
+        #test SSN at the front
+        results_list = find_us_ssn('123-45-6789 is my social security number')
+        self.assertEqual(results_list[0], '123-45-6789')
+
+        # test 2 SSN's
+        results_list = find_us_ssn('123-45-6789 is my social security number and 987-65-4321 is my friends social security number')
+        self.assertEqual(results_list[0], '123-45-6789')
+        self.assertEqual(results_list[1], '987-65-4321')
+
 
     def test_find_email(self):
         # tests email at the end
