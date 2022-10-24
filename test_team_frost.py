@@ -21,18 +21,18 @@ class TeamFrostTests(unittest.TestCase):
         results_list = find_us_ssn('My social security number is 123-45-6789')
         lst = ["123-45-6789"]
         message = " - US SSN Lists Dont Match"
-        self.assertEqual(results_list, [lst], message)
+        self.assertEqual(results_list, lst, message)
 
         # Test for multiple US SSN within a given sentance
         results_list = find_us_ssn('My friends social security is 245-57-8359, and my other friends social security is 678-52-4878')
         lst2 = ["245-57-8359", "678-52-4878"]
         message = " - US SSN Lists Dont Match"
-        self.assertEqual(results_list,[lst2],message)
+        self.assertEqual(results_list, lst2,message)
 
         # Test for invalid case where SSN was not in right format
         results_list = find_us_ssn('My Social Security is 23-56-4576')
         message = " - Invalid SSN Format"
-        self.assertTrue(results_list, message)
+        self.assertFalse(results_list, message)
 
 
     def test_find_email(self):
