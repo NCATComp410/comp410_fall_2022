@@ -16,7 +16,7 @@ def find_visa_mastercard(text) -> list:
 
     if re.search(match1,text):
         return re.findall(match1,text)
-    elif (match2,text):
+    elif re.search(match2,text):
         return re.findall(match2,text)
     else:
         print("Given text in not an occurance of a visa/mastercard number")
