@@ -11,7 +11,18 @@ def find_us_phone_number(text) -> list:
 def find_visa_mastercard(text) -> list:
     """Finds all occurrences of a visa / mastercard number in a text string"""
     # match a 16 digit credit card number
-    return []
+    match1 = r'4\d{3}-\d{4}-\d{4}-\d{4}'
+    match2 = r'5\d{3}-\d{4}-\d{4}-\d{4}'
+
+    if re.search(match1,text):
+        return re.findall(match1,text)
+    elif (match2,text):
+        return re.findall(match2,text)
+    else:
+        print("Given text in not an occurance of a visa/mastercard number")
+        return []
+
+    
 
 
 def find_amex(text) -> list:
