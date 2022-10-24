@@ -30,8 +30,8 @@ def find_email(text) -> list:
     # match an email address
     return re.findall(r'[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+', text)
 
-
 def find_instagram_handle(text) -> list:
     """Finds all occurrences of an instagram handle in a text string"""
-    # match an instagram handle
-    return []
+    rgx_ig = r"(@[\w]{1,30}\b)"
+    lst = re.findall(rgx_ig, text)
+    return lst
