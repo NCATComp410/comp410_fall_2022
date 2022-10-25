@@ -51,12 +51,12 @@ class TeamFrostTests(unittest.TestCase):
     #testing invalid case with no @
     def test_find_instagram_handle(self):
         results_list = find_instagram_handle('My instagram handle is ariorwateva')
-        self.assertFalse(result_list)
+        self.assertFalse(results_list)
     
     #testing invalid case with invalid character
     def test_find_instagram_handle(self):
         results_list = find_instagram_handle('My instagram handle is @arior!wateva')
-        self.assertFalse(result_list)
+        self.assertFalse(results_list)
     
     #testing handle at the beginning of the string
     def test_find_instagram_handle(self):
