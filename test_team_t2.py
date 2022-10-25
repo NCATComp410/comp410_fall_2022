@@ -42,9 +42,6 @@ class TeamFrostTests(unittest.TestCase):
         self.assertEqual(results_list[1], '987-65-4321')
 
     def test_find_email(self):
-        results_list = find_email('My email address is jim.jones@jones.com')
-        self.assertEqual(results_list, [])
-        
         results_list = find_email('My email address is janedoe@mbc.com')
         self.assertEqual(results_list[0], 'janedoe@mbc.com')
 
