@@ -25,26 +25,22 @@ class TeamT2Tests(unittest.TestCase):
         results_list = find_email('My email address is janedoe45@mbc.com')
         self.assertEqual(results_list[0], 'janedoe45@mbc.com')
 
-#return results at the beginning of string
-results_list = find_email('janedoe45@mbc.com is my email address')
-self.assertEqual(results_list[0], 'janedoe45@mbc.com')
+       #return results at the beginning of string
+       results_list = find_email('janedoe45@mbc.com is my email address')
+       self.assertEqual(results_list[0], 'janedoe45@mbc.com')
 
-#return results with multiple addresses
-results_list = find_email('My email address is janedoe45@mbc.com')
-self.assertEqual(results_list[0], 'janedoe45@mbc.com ')
-self.assertEqual(results_list[1], 'doejane45@mbc.com')
+       #return results with multiple addresses
+       results_list = find_email('My email address is janedoe45@mbc.com')
+       self.assertEqual(results_list[0], 'janedoe45@mbc.com ')
+       self.assertEqual(results_list[1], 'doejane45@mbc.com')
 
-#return results for wrong formatting 
-results_list = find_email('My email address is doejane45@mbc.com')
-self.assertFalse(results_list)
+        #return results for wrong formatting 
+        results_list = find_email('My email address is doejane45@mbc.com')
+        self.assertFalse(results_list)
 
-#return results with unneccessary characters
-results_list = find_email('My email address is janedoe45;.@mbc.com')
-self.assertFalse(results_list)
-
-def test_find_instagram_handle(self):
-results_list = find_instagram_handle('My instagram handle is @jimjones')
-self.assertEqual(results_list, [])
+        #return results with unneccessary characters
+        results_list = find_email('My email address is janedoe45;.@mbc.com')
+        self.assertFalse(results_list)
 
 
     def test_find_instagram_handle(self):
