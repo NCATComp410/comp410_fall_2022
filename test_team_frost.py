@@ -31,10 +31,6 @@ class TeamFrostTests(unittest.TestCase):
         results_list = find_visa_mastercard('My credit card number is 1234-5678-9012-3456')
         self.assertEqual(results_list, [])
 
-    def test_find_amex(self):
-        results_list = find_amex('My credit card number is 1234-567890-12345')
-        self.assertEqual(results_list, [])
-
     def test_find_us_ssn(self):
         results_list = find_us_ssn('My social security number is 123-45-6789')
         lst = ["123-45-6789"]
@@ -118,6 +114,27 @@ class TeamFrostTests(unittest.TestCase):
         # Test that no character can precede the handle
         result_list = find_instagram_handle('My email is:@outlook.com')
         self.assertFalse(result_list)
+
+    def test_find_amex(self):
+        # Test that number that doesn't start with a 34 or 37 is denied
+        results_list = find_amex('My credit card number is 1234-567890-12345')
+        self.assertEqual(results_list, [])
+
+        # Test that number with under 15 digits is denied
+        results_list = find_amex('My credit card number is 1234-567890-1234')
+        self.assertEqual(results_list, [])
+
+        # Test that number with over 15 digits is denied
+        results_list = find_amex('My credit card number is 1234-567890-123456')
+        self.assertEqual(results_list, [])
+
+        # Test that number starting with 34 is accepted
+        results_list = find_amex('My credit card number is 3412-567890-12345')
+        self.assertEqual(results_list, [])
+
+        # Test that number starting with 37 is accepted
+        results_list = find_amex('My credit card number is 3712-567890-12345')
+        self.assertEqual(results_list, [])
 
 if __name__ == '__main__':
     unittest.main()
