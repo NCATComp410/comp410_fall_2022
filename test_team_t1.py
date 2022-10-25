@@ -54,7 +54,7 @@ class TeamFrostTests(unittest.TestCase):
         
         #return results in middle of string
         results_list = find_amex('My new card number is 1234-567890-54321. This is a new card')
-        self.assertEqual(results_list[0], '1234-567890-54321')
+        self.assertEqual(results_list[], '1234-567890-54321')
         
         #return wrong number format
         results_list = find_amex('The card number is 1234-5678-90123')
@@ -62,7 +62,7 @@ class TeamFrostTests(unittest.TestCase):
         
         #return number from end of string
         results_list = find_amex('Her card number is 0987-654321-23456')
-        self.assertEqual(results_list[0], '0987-654321-23456')
+        self.assertEqual(results_list[], '0987-654321-23456')
 
     def test_find_us_ssn(self):
         results_list = find_us_ssn('My social security number is 123-45-6789')
