@@ -1,5 +1,5 @@
 import re
-from types import NoneType
+# from types import NoneType
 
 
 def find_us_phone_number(text) -> list:
