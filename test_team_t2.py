@@ -42,10 +42,35 @@ class TeamFrostTests(unittest.TestCase):
         self.assertEqual(results_list[1], '987-65-4321')
 
     def test_find_email(self):
-        results_list = find_email('My email address is jim.jones@jones.com')
-        self.assertEqual(results_list, [])
-    
-    #testing alphabetical
+        results_list = find_email('My email address is janedoe@mbc.com')
+        self.assertEqual(results_list[0], 'janedoe@mbc.com')
+        
+        #testing the alphabet 
+        results_list = find_email('My email address is janedoe@mbc.com')
+        self.assertEqual(results_list[0], 'janedoe@mbc.com')
+
+        #testing case sensitivity
+        results_list = find_email('My email address is Janedoe@mbc.com')
+        self.assertEqual(results_list[0], 'Janedoe@mbc.com ')
+        
+        #testing numericals
+        results_list = find_email('My email address is janedoe45@mbc.com')
+        self.assertEqual(results_list[0], 'janedoe45@mbc.com ')
+        
+        #testing with unneccessary characters(;)
+        results_list = find_email('My email address is janedoe;@mbc.com')
+        self.assertEqual(result_list[0], 'janedoe;@mbc.com')
+        
+        #testing with unneccessary characters(/)
+        results_list = find_email('My email address is janedoe/@mbc.com')
+        self.assertEqual(result_list[0], 'janedoe/@mbc.com')
+        
+        #testing without symbols (@)
+        results_list = find_email('My email address is janedoembc.com')
+        self.assertEqual(result_list)
+        
+        
+        #testing alphabetical
     def test_find_instagram_handle(self):
         results_list = find_instagram_handle('My instagram handle is @ariorwateva')
         self.assertEqual(results_list[0], '@ariorwateva')
