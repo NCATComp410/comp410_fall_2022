@@ -27,9 +27,26 @@ class TeamFrostTests(unittest.TestCase):
         results_list = find_us_phone_number('1234567890 is my phone number')
         self.assertFalse(results_list)
 
-    def test_find_visa_mastercard(self):
+        def test_find_visa_mastercard(self):
         results_list = find_visa_mastercard('My credit card number is 1234-5678-9012-3456')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], '1234-567890-12345')
+
+        results_list = find_visa_mastercard('1234-5678-9012-3456 is my credit card number')
+        self.assertEqual(results_list[0], '1234-5678-9012-3456')
+
+        # more than one card number
+        results_list = find_visa_mastercard('I have 2 cards. one number is 1234-5678-9012-3456 '
+                                            'the other is 5489-1304-2985-7529')
+        self.assertEqual(results_list[0], '1234-5678-9012-3456')
+        self.assertEqual(results_list[1], '5489-1304-2985-7529')
+
+        # wrong format-credit card number incomplete
+        results_list = find_visa_mastercard('My credit card number is 1234-5678-3456')
+        self.assertFalse(results_list)
+
+        # with a letter
+        results_list = find_visa_mastercard('My credit card number is 1AB4-5678-9012-3456')
+        self.assertFalse(results_list)
 
     def test_find_amex(self):
         results_list = find_amex('My credit card number is 1234-567890-12345')
