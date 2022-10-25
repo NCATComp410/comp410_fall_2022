@@ -58,10 +58,7 @@ class TeamFrostTests(unittest.TestCase):
         results_list = find_instagram_handle('My instagram handle is @arior!wateva')
         self.assertFalse(results_list)
     
-    #testing handle at the beginning of the string
-    def test_find_instagram_handle(self):
-        results_list = find_instagram_handle('@ariorwateva is my instagram handle')
-        self.assertEqual(results_list[0], '@ariorwateva')
+
     
 
 
