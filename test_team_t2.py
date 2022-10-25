@@ -65,9 +65,7 @@ class TeamFrostTests(unittest.TestCase):
         results_list = find_email('My email address is janedoe/@mbc.com')
         self.assertEqual(result_list[0], 'janedoe/@mbc.com')
 
-        #testing without symbols (@)
-        results_list = find_email('My email address is janedoembc.com')
-        self.assertFalse(result_list)
+       
 
     
     #testing alphabetical
