@@ -4,7 +4,8 @@ import re
 def find_us_phone_number(text) -> list:
     """Finds all occurrences of a US phone number in a text string"""
     # match a 10 digit phone number with area code
-    return []
+    num = re.findall(r'\d{3}[-\.\s]\d{3}[-\.\s]\d{4}', text)
+    return num
 
 
 def find_visa_mastercard(text) -> list:
