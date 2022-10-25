@@ -25,8 +25,20 @@ class TeamFrostTests(unittest.TestCase):
 
 
     def test_find_amex(self):
-        results_list = find_amex('My credit card number is 1234-567890-12345')
-        self.assertEqual(results_list, [])
+        results_list = find_amex('My Amex card number is 1234-567890-12345')
+        self.assertEqual(results_list[0], "1234-567890-12345")
+
+        results_list = find_amex('1234-567890-12345 is my Amex card number')
+        self.assertEqual(results_list[0], "1234-567890-12345")
+
+        results_list = find_amex('The number, 1234-567890-12345, could be my Amex card number')
+        self.assertEqual(results_list[0], "1234-567890-12345")
+
+        results_list = find_amex('The number 1234-567890-12345 is my Amex card number,'
+                                 ' but 8765-295653-01928 and 7205-592436-07632 are my old numbers')
+        self.assertEqual(results_list[0], "1234-567890-12345")
+        self.assertEqual(results_list[1], "8765-295653-01928")
+        self.assertEqual(results_list[2], "7205-592436-07632")
 
     def test_find_us_ssn(self):
         results_list = find_us_ssn('My social security number is 123-45-6789')
