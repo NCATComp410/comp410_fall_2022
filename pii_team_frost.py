@@ -13,7 +13,7 @@ def find_visa_mastercard(text) -> list:
     # match a 16 digit credit card number
     return []
 
-# All American Express account numbers start with “37” or “34”.
+# All American Express account numbers must start with “37” or “34”.
 def find_amex(text) -> list:
     """Finds all occurrences of an amex number in a text string"""
     # match a 15 digit credit card number
