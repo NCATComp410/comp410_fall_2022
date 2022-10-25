@@ -22,7 +22,7 @@ def find_amex(text) -> list:
 def find_us_ssn(text) -> list:
     """Finds all occurrences of a US social security number in a text string"""
     # match a 9 digit social security number
-    return []
+    return re.findall(r'(\b\d{3}-?\d{2}-?\d{4}\b)', text)
 
 
 def find_email(text) -> list:
