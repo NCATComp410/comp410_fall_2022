@@ -54,8 +54,23 @@ class TeamFrostTests(unittest.TestCase):
         self.assertFalse(results_list)
 
     def test_find_instagram_handle(self):
+        #handle with only letters
         results_list = find_instagram_handle('My instagram handle is @jimjones')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], '@jimjones')
+        #handle with letters and digits
+        results_list = find_instagram_handle('My instagram handle is @jimj0nes4')
+        self.assertEqual(results_list[0], '@jimj0nes4')
+        #handle with periods and underscore
+        results_list = find_instagram_handle('My instagram handle is @jim.jones_')
+        self.assertEqual(results_list[0], '@jim.jones_')
+        #two handles
+        results_list = find_instagram_handle('My instagram handle is @jimjones and my alt is @jonesjimmy')
+        self.assertEqual(results_list[0], '@jimjones')
+        self.assertEqual(results_list[1], '@jonesjimmy')
+        #invalid handle
+        results_list = find_instagram_handle('My instagram handle is @?imjones')
+        self.assertFalse(results_list)
+
 
 
 if __name__ == '__main__':
