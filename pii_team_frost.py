@@ -1,5 +1,5 @@
 import re
-from types import NoneType
+# from types import NoneType
 
 
 def find_us_phone_number(text) -> list:
@@ -13,11 +13,11 @@ def find_visa_mastercard(text) -> list:
     # match a 16 digit credit card number
     return []
 
-
+# All American Express account numbers start with “37” or “34”.
 def find_amex(text) -> list:
     """Finds all occurrences of an amex number in a text string"""
     # match a 15 digit credit card number
-    return []
+    return re.findall(r'^(34|37)\d{2}-\d{6}-\d{5}', text)
 
 
 def find_us_ssn(text) -> list:
