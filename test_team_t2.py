@@ -9,7 +9,20 @@ class TeamFrostTests(unittest.TestCase):
 
     def test_find_visa_mastercard(self):
         results_list = find_visa_mastercard('My credit card number is 1234-5678-9012-3456')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], "1234-5678-9012-3456")
+
+        results_list = find_visa_mastercard('1234-5678-9012-3456 is my credit card number')
+        self.assertEqual(results_list[0], "1234-5678-9012-3456")
+
+        results_list = find_visa_mastercard('The number, 1234-5678-9012-3456, could be my credit card number')
+        self.assertEqual(results_list[0], "1234-5678-9012-3456")
+
+        results_list = find_visa_mastercard('The number, 1234-5678-9012-3456, is my credit card number, '
+                                            'but 3245-7397-9275-2643, and 9432-7849-7234-2987 are my old numbers.')
+        self.assertEqual(results_list[0], "1234-5678-9012-3456")
+        self.assertEqual(results_list[1], "3245-7397-9275-2643")
+        self.assertEqual(results_list[2], "9432-7849-7234-2987")
+
 
     def test_find_amex(self):
         results_list = find_amex('My credit card number is 1234-567890-12345')
