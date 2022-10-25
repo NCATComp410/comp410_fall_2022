@@ -16,8 +16,30 @@ class TeamFrostTests(unittest.TestCase):
         self.assertEqual(results_list, [])
 
     def test_find_us_ssn(self):
+        # Test a single SSN with dashes
         results_list = find_us_ssn('My social security number is 123-45-6789')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], '123-45-6789')
+
+        # Test a single SSN without dashes
+        results_list = find_us_ssn('My social security number is 123456789')
+        self.assertEqual(results_list[0], '123456789')
+
+        # Test SSN at start of string
+        results_list = find_us_ssn('123456789 is my social security number.')
+        self.assertEqual(results_list[0], '123456789')
+
+        # Test SSN in middle of string
+        results_list = find_us_ssn('My SSN 123456789 has been compromised.')
+        self.assertEqual(results_list[0], '123456789')
+
+        # Test SSN with dashes at end of string
+        results_list = find_us_ssn('My SSN is 123-45-6789.')
+        self.assertEqual(results_list[0], '123-45-6789')
+
+        # Test multiple SSN within string
+        results_list = find_us_ssn('My SSN is 123456789 and his is 987-65-4321.')
+        self.assertEqual(results_list[0], '123456789')
+        self.assertEqual(results_list[1], '987-65-4321')
 
     def test_find_email(self):
         results_list = find_email('My email address is jim.jones@jones.com')
