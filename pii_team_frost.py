@@ -29,7 +29,7 @@ def find_us_ssn(text) -> list:
 def find_email(text) -> list:
     """Finds all occurrences of an email address in a text string"""
     # match an email address
-    return []
+    return re.findall(r'[\w.\-+]+@(?:[\w-]+\.){1,2}[a-zA-Z]{2,4}$', text)
 
 
 def find_instagram_handle(text) -> list:

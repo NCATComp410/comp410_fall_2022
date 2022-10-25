@@ -36,8 +36,29 @@ class TeamFrostTests(unittest.TestCase):
 
 
     def test_find_email(self):
-        results_list = find_email('My email address is jim.jones@jones.com')
-        self.assertEqual(results_list, [])
+        # Test an alphanumeric email
+        results_list = find_email('My email address is john117@unsc.gov')
+        self.assertEqual(results_list[0], 'john117@unsc.gov')
+
+        # Test a case-insensitive email
+        results_list = find_email('My email address is John117@unsc.gov')
+        self.assertEqual(results_list[0], 'John117@unsc.gov')
+
+        # Test an email a period in the username
+        results_list = find_email('My email address is john.117@unsc.gov')
+        self.assertEqual(results_list[0], 'john.117@unsc.gov')
+
+        # Test an email with an underscore in the username
+        results_list = find_email('My email address is john_117@unsc.gov')
+        self.assertEqual(results_list[0], 'john_117@unsc.gov')
+
+        # Test an email with a second-level domain
+        results_list = find_email('My email address is john117@unsc.gov.uk')
+        self.assertEqual(results_list[0], 'john117@unsc.gov.uk')
+
+        # Test an email with subaddressing
+        results_list = find_email('My email address is john117+waypoint@unsc.com')
+        self.assertEqual(results_list[0], 'john117+waypoint@unsc.com')
 
     def test_find_instagram_handle(self):
         # Test an alphabetical token
