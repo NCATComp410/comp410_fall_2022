@@ -122,7 +122,20 @@ class TeamFrostTests(unittest.TestCase):
 
 
     def test_find_instagram_handle(self):
+        # test an ig handle at the end of a string
         results_list = find_instagram_handle('My instagram handle is @jimjones')
+        self.assertEqual(results_list, ['@jimjones'])
+        # test an ig handle given at the beginning of a string
+        results_list = find_instagram_handle('@jimjones is my instagram handle')
+        self.assertEqual(results_list, ['@jimjones'])
+        # test multiple ig handles given
+        results_list = find_instagram_handle('My instagram handle is @jimjones. My cousin\'s is @caryjones.')
+        self.assertEqual(results_list, ['@jimjones', '@caryjones'])
+        # test with special characters handle
+        results_list = find_instagram_handle('My instagram handle is @jim_jones')
+        self.assertEqual(results_list, ['@jim_jones']) 
+        # test with an invalid ig handle given
+        results_list = find_instagram_handle('My instagram handle is jimjones')
         self.assertEqual(results_list, [])
 
 
