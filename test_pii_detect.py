@@ -64,7 +64,7 @@ class Comp410TestPII(unittest.TestCase):
         self.assertFalse(result_list)
 
     def test_replace_name(self):
-        test_str = 'My name is Jon Bon Jovi'
+        test_str = 'My name is John Edwards'
         expected = 'My name is <PERSON>'
         result = anonymize_pii(test_str)
         self.assertEqual(expected, result.text)
@@ -88,8 +88,8 @@ class Comp410TestPII(unittest.TestCase):
         self.assertEqual(expected, result.text)
 
     def test_replace_multiple(self):
-        test_str = '123-12-1234 and 4095-3434-2424-1414'
-        expected = '<US_SSN> and <CREDIT_CARD>'
+        test_str = '750-12-1234 and 4095-3434-2424-1414 and 919-555-1212'
+        expected = '<US_SSN> and <CREDIT_CARD> and <PHONE_NUMBER>'
         result = anonymize_pii(test_str)
         self.assertEqual(expected, result.text)
 
