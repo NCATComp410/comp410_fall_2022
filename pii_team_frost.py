@@ -1,5 +1,7 @@
 import re
-# from types import NoneType
+import spacy
+from presidio_analyzer import AnalyzerEngine, RecognizerRegistry, PatternRecognizer, Pattern
+from presidio_anonymizer import AnonymizerEngine
 
 
 def find_us_phone_number(text) -> list:
@@ -36,3 +38,35 @@ def find_instagram_handle(text) -> list:
     """Finds all occurrences of an instagram handle in a text string"""
     # match an instagram handle
     return re.findall(r'(?<!\S)@[\w\d.]{1,30}', text)
+
+
+
+def anonymize_pii(text) :
+    SSN_pattern = Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9)
+    SSN_recognizer = PatternRecognizer(supported_entity = 'US_SSN', patterns = [SSN_pattern])
+    registry = RecognizerRegistry()
+    registry.load_predefined_recognizers()
+
+    #Add Custom Recognizers
+    registry.add_recognizer(SSN_recognizer)
+
+    #Setup analyzer with updated recognizer registry
+    analyzer = AnalyzerEngine (registry = registry)
+
+    detect_types = ['US_SSN']
+    
+    results = analyzer.analyze(text = text, entities = detect_types, language = 'en')
+
+    # Initialize the engine and anonymize the results
+    engine = AnonymizerEngine()
+    anon = engine.anonymize(text = text, analyzer_results = results)
+
+    return anon
+
+
+if __name__ == '__main__' :
+    
+     print(anonymize_pii('John Edwards called the help desk for help with their credit card 4095-3434-2424-1414. '+
+                         'They provided their ssn 750-12-1234 and phone number 919-555-1212 which were used to verify their account. '+
+                         'They also provided their email address je2@edwards.com and their social medial handle @jon_edwards for future contact. '+
+                         'They would like future charges billed to an amex account 1234-567890-12345'))
