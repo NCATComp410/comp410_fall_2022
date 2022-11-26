@@ -1,5 +1,17 @@
 import re
+import spacy
+from presidio_analyzer import AnalyzerEngine, RecognizerRegistry, PatternRecognizer, Pattern
+from presidio_anonymizer import AnonymizerEngine
 
+# make sure en_core_web_lg is loaded correctly
+try:
+    nlp = spacy.load("en_core_web_lg")
+except OSError:
+    from spacy.cli import download
+
+    download("en_core_web_lg")
+    nlp = spacy.load("en_core_web_lg")
+    
 
 def find_us_phone_number(text) -> list:
     """Finds all occurrences of a US phone number in a text string"""
@@ -35,3 +47,42 @@ def find_instagram_handle(text) -> list:
     rgx_ig = r"(@[\w]{1,30}\b)"
     lst = re.findall(rgx_ig, text)
     return lst
+
+def anonymize_pii(text):
+    # an account number is 3 or 4 digits followed by a dash and 5 digits
+    account_pattern = Pattern(name='account_pattern', regex=r'\d{3,4}-\d{5}', score=0.9)
+    account_recognizer = PatternRecognizer(supported_entity='ACCOUNT_NUMBER', patterns=[account_pattern])
+
+    # Initialize the recognition registry
+    registry = RecognizerRegistry()
+    registry.load_predefined_recognizers()
+
+    # Add custom recognizers
+    registry.add_recognizer(account_recognizer)
+
+    # Set up analyzer with our updated recognizer registry
+    analyzer = AnalyzerEngine(registry=registry)
+
+    # List of entities to detect
+    detect_types = ['US_SSN', 'PHONE_NUMBER', 'EMAIL_ADDRESS', 'PERSON', 'CREDIT_CARD',
+                    'ACCOUNT_NUMBER']
+
+    results = analyzer.analyze(text=text,
+                               entities=detect_types,
+                               language='en')
+
+    # Initialize the engine and anonymize the results
+    engine = AnonymizerEngine()
+    anon = engine.anonymize(
+        text=text,
+        analyzer_results=results
+    )
+
+    return anon
+
+if __name__ == '__main__':
+    print(anonymize_pii('John Edwards called the help desk for help with their credit card 4095-3434-2424-1414. ' +
+                        'They provided their ssn 750-12-1234 and phone number 919-555-1212 which were used to verify their account. ' +
+                        'They also provided their email address je2@edwards.com and their social medial handle @jon_edwards for future contact. ' + 
+                        'They would like future charges billed to an amex account 1234-567890-12345'))
+    
