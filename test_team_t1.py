@@ -143,38 +143,38 @@ class TeamFrostTests(unittest.TestCase):
         string = 'My phone number is 336-123-8945'
         convert = 'My phone number is <PHONE_NUMBER>'
         output = anonymize_pii(string)
-        self.assertEqual(convert, output)
+        self.assertEqual(convert, output.text)
 
         # Test replacing a phone number at the beginning o the sentence
         string = '336-123-8945 is my phone number'
         convert = '<PHONE_NUMBER> is my phone number'
         output = anonymize_pii(string)
-        self.assertEqual(convert, output)
+        self.assertEqual(convert, output.text)
 
         # test replacing multiple phone numbers
         string = 'My phone numbers are 336-123-8945 and 450-998-6363'
         convert = 'My phone numbers are <PHONE_NUMBER> and <PHONE_NUMBER>'
         output = anonymize_pii(string)
-        self.assertEqual(convert, output)
+        self.assertEqual(convert, output.text)
 
     def test_replace_us_ssn(self):
         # test replace ssn at the end of a string
         string = 'My ssn is 123-45-6789'
         convert = 'My ssn is <US_SSN>'
         output = anonymize_pii(string)
-        self.assertEqual(convert, output)
+        self.assertEqual(convert, output.text)
 
         # test replace ssn at the beginning of a string
         string = '123-45-6789 is my ssn'
         convert = '<US_SSN> is my ssn'
         output = anonymize_pii(string)
-        self.assertEqual(convert, output)
+        self.assertEqual(convert, output.text)
 
         # test replace multiple ssn
         string = 'My ssn is 123-45-6789 but it used to be 321-54-9876'
         convert = 'My ssn is <US_SSN> but it used to be <US_SSN>'
         output = anonymize_pii(string)
-        self.assertEqual(convert, output)
+        self.assertEqual(convert, output.text)
 
 
 if __name__ == '__main__':
