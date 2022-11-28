@@ -82,3 +82,10 @@ def anonymize_pii(text):
     )
 
     return anon
+
+
+if __name__ == '__main__':
+    print(anonymize_pii('John Edwards called the help desk for help with their credit card 4095-3434-2424-1414. ' +
+                        'They provided their ssn 750-12-1234 and phone number 919-555-1212 which were used to verify their account. ' +
+                        'They also provided their email address je2@edwards.com and their social medial handle @jon_edwards for future contact. ' +
+                        'They would like future charges billed to an amex account 1234-567890-12345'))
