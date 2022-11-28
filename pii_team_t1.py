@@ -1,6 +1,40 @@
 import re
+import spacy
+from presidio_analyzer import AnalyzerEngine, RecognizerRegistry, PatternRecognizer, Pattern
+from presidio_anonymizer import AnonymizerEngine
 
 
+def anonymize_pii(text):
+    # an account number is 3 or 4 digits followed by a dash and 5 digits
+    account_pattern = Pattern(name='account_pattern', regex=r'\d{3,4}-\d{5}', score=0.9)
+    account_recognizer = PatternRecognizer(supported_entity='ACCOUNT_NUMBER', patterns=[account_pattern])
+
+    # Initialize the recognition registry
+    registry = RecognizerRegistry()
+    registry.load_predefined_recognizers()
+
+    # Add custom recognizers
+    registry.add_recognizer(account_recognizer)
+
+    # Set up analyzer with our updated recognizer registry
+    analyzer = AnalyzerEngine(registry=registry)
+
+    # List of entities to detect
+    detect_types = ['US_SSN', 'PHONE_NUMBER', 'EMAIL_ADDRESS', 'PERSON', 'CREDIT_CARD',
+                    'ACCOUNT_NUMBER']
+
+    results = analyzer.analyze(text=text,
+                               entities=detect_types,
+                               language='en')
+
+    # Initialize the engine and anonymize the results
+    engine = AnonymizerEngine()
+    anon = engine.anonymize(
+        text=text,
+        analyzer_results=results
+    )
+
+    return anon
 def find_us_phone_number(text) -> list:
     """Finds all occurrences of a US phone number in a text string"""
     # match a 10 digit phone number with area code
