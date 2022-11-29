@@ -14,16 +14,6 @@ except OSError:
     nlp = spacy.load("en_core_web_lg")
 
 
-# make sure en_core_web_lg is loaded correctly
-try:
-    nlp = spacy.load("en_core_web_lg")
-except OSError:
-    from spacy.cli import download
-
-    download("en_core_web_lg")
-    nlp = spacy.load("en_core_web_lg")
-    
-
 def find_us_phone_number(text) -> list:
     """Finds all occurrences of a US phone number in a text string"""
     # match a 10 digit phone number with area code
@@ -69,6 +59,10 @@ def anonymize_pii(text):
     # a credit card is 4 sets of 4 digits seperated by dashes
     credit_pattern = Pattern(name='credit_pattern', regex=r'\d{4}-\d{4}-\d{4}-\d{4}', score=0.9)
     credit_recognizer = PatternRecognizer(supported_entity='CREDIT_CARD', patterns=[credit_pattern])
+    
+    #an amex card number is a set of 4 digits, 6 digits, and 5 digits, separated by dashes
+    amex_number_pattern = Pattern(name='amex_number', regex=r'\d{4}-\d{6}-\d{5}', score=0.9)
+    amex_recognizer = PatternRecognizer(supported_entity='AMEX_NUMBER', patterns=[amex_number_pattern])
 
     # Initialize the recognition registry
     registry = RecognizerRegistry()
@@ -77,13 +71,16 @@ def anonymize_pii(text):
     # Add custom recognizers
     registry.add_recognizer(account_recognizer)
     registry.add_recognizer(credit_recognizer)
+    registry.add_recognizer(amex_recognizer)
 
     # Set up analyzer with our updated recognizer registry
     analyzer = AnalyzerEngine(registry=registry)
 
     # List of entities to detect
-    detect_types = ['US_SSN', 'PHONE_NUMBER', 'EMAIL_ADDRESS', 'PERSON', 'CREDIT_CARD',
-                    'ACCOUNT_NUMBER']
+    detect_types = ['US_SSN', 'PHONE_NUMBER', 'EMAIL_ADDRESS', 'PERSON', 'CREDIT_CARD', 'ACCOUNT_NUMBER', 'IG_HANDLE', 'AMEX_NUMBER']
+
+                    
+
 
     results = analyzer.analyze(text=text,
                                entities=detect_types,
@@ -104,4 +101,3 @@ if __name__ == '__main__':
                         'They provided their ssn 750-12-1234 and phone number 919-555-1212 which were used to verify their account. ' +
                         'They also provided their email address je2@edwards.com and their social medial handle @jon_edwards for future contact. ' +
                         'They would like future charges billed to an amex account 1234-567890-12345'))
-
