@@ -14,13 +14,13 @@ def find_us_phone_number(text):
 def find_visa_mastercard(text):
     """Finds all occurrences of a visa / mastercard number in a text string"""
     # match a 16 digit credit card number
-    return re.findall(r'\d{4}-\d{4}-\d{4}-\d{4}', text)
+    return re.findall(r'\d{4}[\s+, \-]?\d{4}[\s+, \-]?\d{4}[\s+, \-]?\d{4}'', text)
 
 # All American Express account numbers must start with “37” or “34”.
 def find_amex(text):
     """Finds all occurrences of an amex number in a text string"""
     # match a 15 digit credit card number
-    return re.findall(r'\d{4}-\d{6}-\d{5}$', text)
+    return re.findall(r'\d{4}[\s+, \-]?\d{6}[\s+, \-]?\d{5}$', text)
 
 
 def find_us_ssn(text):
