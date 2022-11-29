@@ -1,40 +1,49 @@
+# -*- coding: utf-8 -*-
 import re
 import spacy
 from presidio_analyzer import AnalyzerEngine, RecognizerRegistry, PatternRecognizer, Pattern
 from presidio_anonymizer import AnonymizerEngine
 
+# make sure en_core_web_lg is loaded correctly
+try:
+    nlp = spacy.load("en_core_web_lg")
+except OSError:
+    from spacy.cli import download
 
-def find_us_phone_number(text) -> list:
+    download("en_core_web_lg")
+    nlp = spacy.load("en_core_web_lg")
+
+def find_us_phone_number(text):
     """Finds all occurrences of a US phone number in a text string"""
     # match a 10 digit phone number with area code
     return re.findall(r'\d{3}-\d{3}-\d{4}', text)
 
 
-def find_visa_mastercard(text) -> list:
+def find_visa_mastercard(text):
     """Finds all occurrences of a visa / mastercard number in a text string"""
     # match a 16 digit credit card number
     return re.findall(r'\d{4}-\d{4}-\d{4}-\d{4}', text)
 
 # All American Express account numbers must start with “37” or “34”.
-def find_amex(text) -> list:
+def find_amex(text):
     """Finds all occurrences of an amex number in a text string"""
     # match a 15 digit credit card number
     return re.findall(r'^(34|37)\d{2}-\d{6}-\d{5}', text)
 
 
-def find_us_ssn(text) -> list:
+def find_us_ssn(text):
     """Finds all occurrences of a US social security number in a text string"""
     # match a 9 digit social security number
     return re.findall(r'\d{3}-\d{2}-\d{4}', text)
 
 
-def find_email(text) -> list:
+def find_email(text):
     """Finds all occurrences of an email address in a text string"""
     # match an email address
     return re.findall(r'[\w.\-+]+@(?:[\w-]+\.){1,2}[a-zA-Z]{2,4}$', text)
 
 
-def find_instagram_handle(text) -> list:
+def find_instagram_handle(text):
     """Finds all occurrences of an instagram handle in a text string"""
     # match an instagram handle
     return re.findall(r'(?<!\S)@[\w\d.]{1,30}', text)
@@ -42,18 +51,37 @@ def find_instagram_handle(text) -> list:
 
 
 def anonymize_pii(text) :
-    SSN_pattern = Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9)
-    SSN_recognizer = PatternRecognizer(supported_entity = 'US_SSN', patterns = [SSN_pattern])
+    patterns = {
+        "US_SSN": Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9),
+        "AT_HANDLE": Pattern(name = 'AT_HANDLE_pattern', regex = r'(?<!\S)@[\w\d.]{1,30}', score = 0.9),
+        "EMAIL": Pattern(name = 'EMAIL_pattern', regex = r"([a-z0-9!#$%&'*+\/=?^_`{|.}~-]+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)", 
+            score = 0.9),
+        "AMEX": Pattern(name = 'AMEX_pattern', regex = r'^3[4]|[7]\d{2}-\d{6}-\d{5}$', score = 0.9),
+        "MASTERCARD": Pattern(name = 'AMEX_pattern', regex = r'^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[\s+, \-]?\d{4}[\s+, \-]?\d{4}[\s+, \-]?\d{4}$', 
+            score = 0.9),
+        "US_PHONE": Pattern(name = 'AT_HANDLE_pattern', regex = r'\d{3}-\d{3}-\d{4}', score = 0.9),
+    }
+    # SSN_pattern = Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9)
+    recognizers = {
+        "SSN_recognizer": PatternRecognizer(supported_entity = 'US_SSN', patterns = [patterns['US_SSN']]),
+        "HANDLE_recognizer": PatternRecognizer(supported_entity = 'AT_HANDLE', patterns = [patterns['AT_HANDLE']]),
+        "EMAIL_recognizer": PatternRecognizer(supported_entity = 'EMAIL', patterns = [patterns['EMAIL']]),
+        "AMEX_recognizer": PatternRecognizer(supported_entity = 'AMEX', patterns = [patterns['AMEX']]),
+        "MASTERCARD_recognizer": PatternRecognizer(supported_entity = 'MASTERCARD', patterns = [patterns['MASTERCARD']]),
+        "PHONE_recognizer": PatternRecognizer(supported_entity = 'US_PHONE', patterns = [patterns['US_PHONE']]),
+    }
+    
     registry = RecognizerRegistry()
     registry.load_predefined_recognizers()
 
     #Add Custom Recognizers
-    registry.add_recognizer(SSN_recognizer)
+    for pattern in recognizers:
+        registry.add_recognizer(pattern)
 
     #Setup analyzer with updated recognizer registry
     analyzer = AnalyzerEngine (registry = registry)
 
-    detect_types = ['US_SSN']
+    detect_types = ['US_SSN', 'EMAIL', 'AT_HANDLE', 'AMEX', 'MASTERCARD', 'US_PHONE']
     
     results = analyzer.analyze(text = text, entities = detect_types, language = 'en')
 
