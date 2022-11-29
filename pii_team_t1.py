@@ -86,7 +86,7 @@ def anonymize_pii(text):
     registry.add_recognizer(account_recognizer)
     registry.add_recognizer(ig_handle_recognizer)
     registry.add_recognizer(credit_recognizer)
-    registry.add_recognizer(amex_number_recognizer)
+    registry.add_recognizer(amex_recognizer)
 
     # Set up analyzer with our updated recognizer registry
     analyzer = AnalyzerEngine(registry=registry)
