@@ -66,12 +66,17 @@ def anonymize_pii(text):
     account_pattern = Pattern(name='account_pattern', regex=r'\d{3,4}-\d{5}', score=0.9)
     account_recognizer = PatternRecognizer(supported_entity='ACCOUNT_NUMBER', patterns=[account_pattern])
 
+    # a credit card is 4 sets of 4 digits seperated by dashes
+    credit_pattern = Pattern(name='credit_pattern', regex=r'\d{4}-\d{4}-\d{4}-\d{4}', score=0.9)
+    credit_recognizer = PatternRecognizer(supported_entity='CREDIT_CARD', patterns=[credit_pattern])
+
     # Initialize the recognition registry
     registry = RecognizerRegistry()
     registry.load_predefined_recognizers()
 
     # Add custom recognizers
     registry.add_recognizer(account_recognizer)
+    registry.add_recognizer(credit_recognizer)
 
     # Set up analyzer with our updated recognizer registry
     analyzer = AnalyzerEngine(registry=registry)
