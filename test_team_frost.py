@@ -132,10 +132,6 @@ class TeamFrostTests(unittest.TestCase):
         self.assertFalse(result_list)
 
     def test_find_amex(self):
-        # Test that number that doesn't start with a 34 or 37 is denied
-        results_list = find_amex('My credit card number is 1234-567890-12345')
-        self.assertEqual(results_list, [])
-
         # Test that number with under 15 digits is denied
         results_list = find_amex('My credit card number is 1234-567890-1234')
         self.assertEqual(results_list, [])
@@ -146,11 +142,11 @@ class TeamFrostTests(unittest.TestCase):
 
         # Test that number starting with 34 is accepted
         results_list = find_amex('My credit card number is 3412-567890-12345')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], '3412-567890-12345')
 
         # Test that number starting with 37 is accepted
         results_list = find_amex('My credit card number is 3712-567890-12345')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], '3712-567890-12345')
 
 class Comp410TestPII(unittest.TestCase):
     def test_find_city_state(self):
