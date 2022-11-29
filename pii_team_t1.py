@@ -59,6 +59,10 @@ def anonymize_pii(text):
     # a credit card is 4 sets of 4 digits seperated by dashes
     credit_pattern = Pattern(name='credit_pattern', regex=r'\d{4}-\d{4}-\d{4}-\d{4}', score=0.9)
     credit_recognizer = PatternRecognizer(supported_entity='CREDIT_CARD', patterns=[credit_pattern])
+    
+    #an amex card number is a set of 4 digits, 6 digits, and 5 digits, separated by dashes
+    amex_number_pattern = Pattern(name='amex_number', regex=r'\d{4}-\d{6}-\d{5}', score=0.9)
+    amex_recognizer = PatternRecognizer(supported_entity='AMEX_NUMBER', patterns=[amex_number_pattern])
 
     # Initialize the recognition registry
     registry = RecognizerRegistry()
@@ -67,13 +71,16 @@ def anonymize_pii(text):
     # Add custom recognizers
     registry.add_recognizer(account_recognizer)
     registry.add_recognizer(credit_recognizer)
+    registry.add_recognizer(amex_recognizer)
 
     # Set up analyzer with our updated recognizer registry
     analyzer = AnalyzerEngine(registry=registry)
 
     # List of entities to detect
-    detect_types = ['US_SSN', 'PHONE_NUMBER', 'EMAIL_ADDRESS', 'PERSON', 'CREDIT_CARD',
-                    'ACCOUNT_NUMBER']
+    detect_types = ['US_SSN', 'PHONE_NUMBER', 'EMAIL_ADDRESS', 'PERSON', 'CREDIT_CARD', 'ACCOUNT_NUMBER', 'IG_HANDLE', 'AMEX_NUMBER']
+
+                    
+
 
     results = analyzer.analyze(text=text,
                                entities=detect_types,
