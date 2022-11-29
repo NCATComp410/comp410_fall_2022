@@ -48,6 +48,7 @@ def anonymize_pii(text) :
         "AMEX": Pattern(name = 'AMEX_pattern', regex = r'^3[4]|[7]\d{2}-\d{6}-\d{5}$', score = 0.9),
         "IG_HANDLE": Pattern(name = 'IG_pattern', regex = r'(?<!\S)@[\w\d.]{1,30}', score = 0.9),
         "US_PHONE_NUMBER": Pattern(name = 'US_PHONE_NUMBER', regex = r'\d{3}-\d{3}-\d{4}', score = 0.9),
+        "MASTERCARD": Pattern(name='MASTERCARD_pattern', regex = r'^5[1-5][0-9]{14}|^(222[1-9]|22[3-9]\\d|2[3-6]\\d{2}|27[0-1]\\d|2720)[0-9]{12}$', score=0.9)
     }
 
     recognizers = {
@@ -55,6 +56,7 @@ def anonymize_pii(text) :
         "AMEX_recognizer": PatternRecognizer(supported_entity = 'AMEX', patterns = [patterns['AMEX']]),
         "IG_recognizer": PatternRecognizer(supported_entity = 'IG_HANDLE', patterns = [patterns['IG_HANDLE']]),
         "US_PHONE_recognizer": PatternRecognizer(supported_entity = 'US_PHONE_NUMBER', patterns = [patterns['US_PHONE_NUMBER']]),
+        "MASTERCARD_recognizer": PatternRecognizer(supported_entity='MASTERCARD', patterns=[patterns['MASTERCARD']])
     }
 
     registry = RecognizerRegistry()
@@ -66,7 +68,7 @@ def anonymize_pii(text) :
     #Setup analyzer with updated recognizer registry
     analyzer = AnalyzerEngine (registry = registry)
 
-    detect_types = ['US_SSN', 'AMEX', 'IG_HANDLE', 'US_PHONE_NUMBER']
+    detect_types = ['US_SSN', 'AMEX', 'IG_HANDLE', 'US_PHONE_NUMBER', 'MASTERCARD']
 
     results = analyzer.analyze(text = text, entities = detect_types, language = 'en')
 
