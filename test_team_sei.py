@@ -21,8 +21,6 @@ class SEITestCases(unittest.TestCase):
         self.assertEqual(results_list[0], '5234-5678-9012-3456')
 
 
-
-
     def test_find_amex(self):
         results_list = find_amex('My credit card number is 1234-567890-12345')
         self.assertEqual(results_list[0], '1234-567890-12345')
