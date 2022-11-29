@@ -1,4 +1,5 @@
 import re
+import spacy
 from presidio_analyzer import AnalyzerEngine, RecognizerRegistry, PatternRecognizer, Pattern
 from presidio_anonymizer import AnonymizerEngine
 
@@ -42,26 +43,38 @@ def find_instagram_handle(text) -> list:
 
     return re.findall(r'@[\w._]{1,30}', text)
 
-def anonymize_instagram(text):
+def anonymize(text):
     instagram_p = Pattern(name="Instagram",regex=r'(?<!\S)@[\w._]{1,30}',score=0.9)
+    amex_p = Pattern(name="Amex", regex=r'\d{4}\-\d{6}\-\d{5}', score=0.9)
+    mastercard_p = Pattern(name="MASTERCARD", regex=r'\d{4}-\d{4}-\d{4}-\d{4}', score=0.9)
 
 
     instagram_recognizer = PatternRecognizer(supported_entity="INSTAGRAM_HANDLE", supported_language="en", patterns=[instagram_p])
     instagram_recognizer.analyze(text,entities="INSTAGRAM_HANDLE")
 
+    amex_recognizer = PatternRecognizer(supported_entity="AMEX", supported_language="en", patterns=[amex_p])
+    amex_recognizer.analyze(text, entities="AMEX")
+
+    mastercard_recognizer = PatternRecognizer(supported_entity="MASTERCARD", supported_language="en", patterns=[mastercard_p])
+    mastercard_recognizer.analyze(text, entities="AMEX")
+
     registry = RecognizerRegistry()
     registry.load_predefined_recognizers()
     registry.add_recognizer(instagram_recognizer)
+    registry.add_recognizer(amex_recognizer)
+    registry.add_recognizer(mastercard_recognizer)
     analyzer = AnalyzerEngine(registry=registry)
 
-    results = analyzer.analyze(text=text,entities=['INSTAGRAM_HANDLE'],   language="en")
+    detect_types = ['US_SSN', 'PHONE_NUMBER', 'EMAIL_ADDRESS', 'AMEX', 'INSTAGRAM_HANDLE', 'MASTERCARD', 'PERSON']
+
+    results = analyzer.analyze(text=text,entities=detect_types,   language="en")
     engine = AnonymizerEngine()
     result = engine.anonymize(text=text,analyzer_results= results)
     return result
 
 
 if __name__ == '__main__':
-    print(anonymize_instagram(
+    print(anonymize(
 'John Edwards called the help desk for help with their credit card 4095-3434-2424-1414.'
 + ' They provided their ssn 750-12-1234 and phone number 919-555-1212 which were used to verify their account.'
 + ' They also provided their email address je2@edwards.com and their social medial handle @jon_edwards for future contact.'
