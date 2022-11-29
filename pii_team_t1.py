@@ -1,7 +1,18 @@
 import re
 import spacy
+import spacy
 from presidio_analyzer import AnalyzerEngine, RecognizerRegistry, PatternRecognizer, Pattern
 from presidio_anonymizer import AnonymizerEngine
+
+# make sure en_core_web_lg is loaded correctly
+try:
+    nlp = spacy.load("en_core_web_lg")
+except OSError:
+    from spacy.cli import download
+
+    download("en_core_web_lg")
+    nlp = spacy.load("en_core_web_lg")
+
 
 # make sure en_core_web_lg is loaded correctly
 try:
@@ -42,11 +53,13 @@ def find_email(text) -> list:
     # match an email address
     return re.findall(r'[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+', text)
 
+
 def find_instagram_handle(text) -> list:
     """Finds all occurrences of an instagram handle in a text string"""
     rgx_ig = r"\s*(@[\w]{1,30}\b)"
     lst = re.findall(rgx_ig, text)
     return lst
+
 
 def anonymize_pii(text):
     # an account number is 3 or 4 digits followed by a dash and 5 digits
@@ -56,7 +69,11 @@ def anonymize_pii(text):
     # an instagram handle is a string of 1 to 30 characters beginning with an at '@' symbol
     ig_handle_pattern = Pattern(name='Instagram_handle', regex=r"\s*(@[\w]{1,30}\b)", score=0.9)
     ig_handle_recognizer = PatternRecognizer(supported_entity='IG_HANDLE', patterns=[ig_handle_pattern])
-    
+
+    # a credit card is 4 sets of 4 digits seperated by dashes
+    credit_pattern = Pattern(name='credit_pattern', regex=r'\d{4}-\d{4}-\d{4}-\d{4}', score=0.9)
+    credit_recognizer = PatternRecognizer(supported_entity='CREDIT_CARD', patterns=[credit_pattern])
+
     # Initialize the recognition registry
     registry = RecognizerRegistry()
     registry.load_predefined_recognizers()
@@ -64,6 +81,7 @@ def anonymize_pii(text):
     # Add custom recognizers
     registry.add_recognizer(account_recognizer)
     registry.add_recognizer(ig_handle_recognizer)
+    registry.add_recognizer(credit_recognizer)
 
     # Set up analyzer with our updated recognizer registry
     analyzer = AnalyzerEngine(registry=registry)
@@ -85,9 +103,10 @@ def anonymize_pii(text):
 
     return anon
 
+
 if __name__ == '__main__':
     print(anonymize_pii('John Edwards called the help desk for help with their credit card 4095-3434-2424-1414. ' +
                         'They provided their ssn 750-12-1234 and phone number 919-555-1212 which were used to verify their account. ' +
-                        'They also provided their email address je2@edwards.com and their social medial handle @jon_edwards for future contact. ' + 
+                        'They also provided their email address je2@edwards.com and their social medial handle @jon_edwards for future contact. ' +
                         'They would like future charges billed to an amex account 1234-567890-12345'))
-    
+
