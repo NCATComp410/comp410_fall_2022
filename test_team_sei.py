@@ -5,7 +5,7 @@ from pii_team_sei import *
 class TeamFrostTests(unittest.TestCase):
     def test_find_us_phone_number(self):
         results_list = find_us_phone_number('My phone number is 123-456-7890')
-        self.assertEqual(results_list, [])  # add assertion here
+        self.assertEqual(results_list[0], '123-456-7890')  # add assertion here
 
     def test_find_visa_mastercard(self):
         #Not matching credit card number
@@ -33,7 +33,7 @@ class TeamFrostTests(unittest.TestCase):
 
     def test_find_email(self):
         results_list = find_email('My email address is jim.jones@jones.com')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], 'jim.jones@jones.com')
 
     def test_find_instagram_handle(self):
         results_list = find_instagram_handle('My instagram handle is @jimjones')
