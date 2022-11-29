@@ -44,16 +44,21 @@ def find_instagram_handle(text) -> list:
 def anonymize_pii(text) :
     SSN_pattern = Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9)
     SSN_recognizer = PatternRecognizer(supported_entity = 'US_SSN', patterns = [SSN_pattern])
+
+    IG_pattern = Pattern(name = 'IG_pattern', regex = r'(?<!\S)@[\w\d.]{1,30}', score = 0.9)
+    IG_recognizer = PatternRecognizer(supported_entity = 'IG_HANDLE', patterns = [IG_pattern])
+
     registry = RecognizerRegistry()
     registry.load_predefined_recognizers()
 
     #Add Custom Recognizers
     registry.add_recognizer(SSN_recognizer)
+    registry.add_recognizer(IG_recognizer)
 
     #Setup analyzer with updated recognizer registry
     analyzer = AnalyzerEngine (registry = registry)
 
-    detect_types = ['US_SSN']
+    detect_types = ['US_SSN', 'IG_HANDLE']
     
     results = analyzer.analyze(text = text, entities = detect_types, language = 'en')
 
