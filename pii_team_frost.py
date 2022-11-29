@@ -58,26 +58,12 @@ def find_account_number(text):
 def anonymize_pii(text) :
     patterns = {
         "US_SSN": Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9),
-        "AT_HANDLE": Pattern(name = 'AT_HANDLE_pattern', regex = r'(?<!\S)@[\w\d.]{1,30}', score = 0.9),
-        "EMAIL": Pattern(name = 'EMAIL_pattern', regex = r"([a-z0-9!#$%&'*+\/=?^_`{|.}~-]+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)", 
-            score = 0.9),
         "AMEX": Pattern(name = 'AMEX_pattern', regex = r'^3[4]|[7]\d{2}-\d{6}-\d{5}$', score = 0.9),
-        "CREDIT_CARD": Pattern(name = 'CREDIT_CARD_pattern', regex = r'^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[\s+, \-]?\d{4}[\s+, \-]?\d{4}[\s+, \-]?\d{4}$', 
-            score = 0.9),
-        "PHONE_NUMBER": Pattern(name = 'PHONE_NUMBER_pattern', regex = r'\d{3}-\d{3}-\d{4}', score = 0.9),
-        "ACCOUNT_NUMBER": Pattern(name = 'ACCOUNT_pattern', regex=r'\d{3,4}-\d{5}', score = 0.9),
-        "PERSON": Pattern(name = 'PERSON_pattern', regex = r'[A-Z][a-zA-Z]*', score = 0.9),
     }
     # SSN_pattern = Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9)
     recognizers = {
         "SSN_recognizer": PatternRecognizer(supported_entity = 'US_SSN', patterns = [patterns['US_SSN']]),
-        "HANDLE_recognizer": PatternRecognizer(supported_entity = 'AT_HANDLE', patterns = [patterns['AT_HANDLE']]),
-        "EMAIL_recognizer": PatternRecognizer(supported_entity = 'EMAIL', patterns = [patterns['EMAIL']]),
         "AMEX_recognizer": PatternRecognizer(supported_entity = 'AMEX', patterns = [patterns['AMEX']]),
-        "MASTERCARD_recognizer": PatternRecognizer(supported_entity = 'CREDIT_CARD', patterns = [patterns['CREDIT_CARD']]),
-        "PHONE_recognizer": PatternRecognizer(supported_entity = 'PHONE_NUMBER', patterns = [patterns['PHONE_NUMBER']]),
-        "ACCOUNT_recognizer": PatternRecognizer(supported_entity='ACCOUNT_NUMBER', patterns=[patterns['ACCOUNT_NUMBER']]),
-        "PERSON_recognizer": PatternRecognizer(supported_entity='PERSON', patterns=[patterns['PERSON']])
     }
     
     registry = RecognizerRegistry()
@@ -90,7 +76,7 @@ def anonymize_pii(text) :
     #Setup analyzer with updated recognizer registry
     analyzer = AnalyzerEngine (registry = registry)
 
-    detect_types = ['US_SSN', 'EMAIL', 'AT_HANDLE', 'AMEX', 'CREDIT_CARD', 'PHONE_NUMBER', 'ACCOUNT_NUMBER', 'PERSON']
+    detect_types = ['US_SSN', 'AMEX']
     
     results = analyzer.analyze(text = text, entities = detect_types, language = 'en')
 
