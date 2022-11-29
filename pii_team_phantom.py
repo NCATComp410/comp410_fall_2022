@@ -25,7 +25,9 @@ def find_us_ssn(text) -> list:
     """Finds all occurrences of a US social security number in a text string"""
     # match a 9 digit social security number.
 
-    return re.findall(r'\d{3}\-\d{2}\-\d{4}', text)
+    
+    return re.findall(r'\d{3}\-\d{2}\-\d{4}',text)
+
 
 
 def find_email(text) -> list:
@@ -37,6 +39,7 @@ def find_email(text) -> list:
 def find_instagram_handle(text) -> list:
     """Finds all occurrences of an instagram handle in a text string"""
     # match an instagram handle
+
     return re.findall(r'@[\w._]{1,30}', text)
 
 def anonymize_instagram(text):
@@ -64,3 +67,6 @@ if __name__ == '__main__':
 + ' They also provided their email address je2@edwards.com and their social medial handle @jon_edwards for future contact.'
 + ' They would like future charges billed to an amex account 1234-567890-12345'
     ))
+
+    return re.findall(r'@[\w._]{1,30}',text)
+
