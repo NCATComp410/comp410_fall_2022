@@ -19,11 +19,37 @@ class TeamFrostTests(unittest.TestCase):
         self.assertFalse(results_list)
     def test_find_visa_mastercard(self):
         results_list = find_visa_mastercard('My credit card number is 1234-5678-9012-3456')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], '1234-5678-9012-3456')
+
+        results_list = find_visa_mastercard('1234-5678-9012-3456 is my credit card number')
+        self.assertEqual(results_list[0], '1234-5678-9012-3456')
+
+        # more than one card number
+        results_list = find_visa_mastercard('I have 2 cards. one number is 1234-5678-9012-3456 '
+                                            'the other is 5489-1304-2985-7529')
+        self.assertEqual(results_list[0], '1234-5678-9012-3456')
+        self.assertEqual(results_list[1], '5489-1304-2985-7529')
+
+        # wrong format-credit card number incomplete
+        results_list = find_visa_mastercard('My credit card number is 1234-5678-3456')
+        self.assertFalse(results_list)
+
+        # with a letter
+        results_list = find_visa_mastercard('My credit card number is 1AB4-5678-9012-3456')
+        self.assertFalse(results_list)
 
     def test_find_amex(self):
         results_list = find_amex('My credit card number is 1234-567890-12345')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], '1234-567890-12345')
+        # test credit card number at front
+        results_list = find_amex('1234-567890-12345 is my credit card number')
+        self.assertEqual(results_list[0], '1234-567890-12345')
+
+        # test 2 credit card numbers
+        results_list = find_amex('1234-567890-12345 is my credit card number and 7634-127634-98645 is my other second card.')
+        self.assertEqual(results_list[0], '1234-567890-12345')
+        self.assertEqual(results_list[1], '7634-127634-98645')
+        
 
     def test_find_us_ssn(self):
         results_list = find_us_ssn('My social security number is 123-45-6789')
@@ -65,8 +91,23 @@ class TeamFrostTests(unittest.TestCase):
         self.assertFalse(results_list)
 
     def test_find_instagram_handle(self):
+        #handle with only letters
         results_list = find_instagram_handle('My instagram handle is @jimjones')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], '@jimjones')
+        #handle with letters and digits
+        results_list = find_instagram_handle('My instagram handle is @jimj0nes4')
+        self.assertEqual(results_list[0], '@jimj0nes4')
+        #handle with periods and underscore
+        results_list = find_instagram_handle('My instagram handle is @jim.jones_')
+        self.assertEqual(results_list[0], '@jim.jones_')
+        #two handles
+        results_list = find_instagram_handle('My instagram handle is @jimjones and my alt is @jonesjimmy')
+        self.assertEqual(results_list[0], '@jimjones')
+        self.assertEqual(results_list[1], '@jonesjimmy')
+        #invalid handle
+        results_list = find_instagram_handle('My instagram handle is @?imjones')
+        self.assertFalse(results_list)
+
 
     def test_instagram_anonymizer(self):
         results_list = anonymize_instagram('their social medial handle @jon_edwards for future contact.')
