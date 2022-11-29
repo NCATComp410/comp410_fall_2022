@@ -144,8 +144,8 @@ class TeamFrostTests(unittest.TestCase):
         expected = 'My name is <PERSON>'
         result = anonymize_pii(test_str)
         self.assertEqual(expected, result.text)
-        
-   def test_replace_email(self):
+
+    def test_replace_email(self):
         test_str = "My email is je2@edwards.com"
         expected = "My email is <EMAIL_ADDRESS>"
         result = anonymize_pii(test_str)
