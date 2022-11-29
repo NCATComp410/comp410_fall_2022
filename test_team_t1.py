@@ -138,20 +138,17 @@ class TeamFrostTests(unittest.TestCase):
         results_list = find_instagram_handle('My instagram handle is jimjones')
         self.assertEqual(results_list, [])
 
-
     def test_replace_us_phone_number(self):
         string = 'My phone number is 336-123-8945'
-        convert = 'My phone number is <PHONE_NUMBER>'
-        output = anonymize_pii(string)
-        self.assertEqual(convert, output.text)
-
+        expected = 'My phone number is <PHONE_NUMBER>'
+        result = anonymize_pii(string)
+        self.assertEqual(expected, result.text)
 
     def test_replace_us_ssn(self):
         string = 'My ssn is 123-45-6789'
-        convert = 'My ssn is <US_SSN>'
+        expected = 'My ssn is <US_SSN>'
         output = anonymize_pii(string)
-        self.assertEqual(convert, output.text)
-
+        self.assertEqual(string, output.text)
 
     def test_replace_name(self):
         test_str = 'My name is Jane Doe'
