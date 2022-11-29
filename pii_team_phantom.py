@@ -1,5 +1,5 @@
 import re
-from presidio_analyzer import AnalyzerEngine, PatternRecognizer, AnalyzerEngine, RecognizerRegistry, AnalyzerEngine, Pattern
+from presidio_analyzer import PatternRecognizer, RecognizerRegistry, AnalyzerEngine, Pattern
 from presidio_anonymizer import AnonymizerEngine
 
 def find_us_phone_number(text) -> list:
@@ -52,7 +52,11 @@ def anonymize_instagram(text):
 
     registry = RecognizerRegistry()
     registry.load_predefined_recognizers()
+
+    # Add the recognizer to the existing list of recognizers
     registry.add_recognizer(instagram_recognizer)
+
+    # Set up analyzer with our updated recognizer registry
     analyzer = AnalyzerEngine(registry=registry)
 
     results = analyzer.analyze(text=text,entities=['INSTAGRAM_HANDLE'],   language="en")
