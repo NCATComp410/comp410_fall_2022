@@ -14,6 +14,16 @@ except OSError:
     nlp = spacy.load("en_core_web_lg")
 
 
+# make sure en_core_web_lg is loaded correctly
+try:
+    nlp = spacy.load("en_core_web_lg")
+except OSError:
+    from spacy.cli import download
+
+    download("en_core_web_lg")
+    nlp = spacy.load("en_core_web_lg")
+    
+
 def find_us_phone_number(text) -> list:
     """Finds all occurrences of a US phone number in a text string"""
     # match a 10 digit phone number with area code
@@ -89,3 +99,4 @@ if __name__ == '__main__':
                         'They provided their ssn 750-12-1234 and phone number 919-555-1212 which were used to verify their account. ' +
                         'They also provided their email address je2@edwards.com and their social medial handle @jon_edwards for future contact. ' +
                         'They would like future charges billed to an amex account 1234-567890-12345'))
+
