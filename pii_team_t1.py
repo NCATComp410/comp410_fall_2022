@@ -44,7 +44,7 @@ def find_email(text) -> list:
 
 def find_instagram_handle(text) -> list:
     """Finds all occurrences of an instagram handle in a text string"""
-    rgx_ig = r"^@[\w]{1,30}\b"
+    rgx_ig = r"\s*(@[\w]{1,30}\b)"
     lst = re.findall(rgx_ig, text)
     return lst
 
@@ -54,7 +54,7 @@ def anonymize_pii(text):
     account_recognizer = PatternRecognizer(supported_entity='ACCOUNT_NUMBER', patterns=[account_pattern])
 
     # an instagram handle is a string of 1 to 30 characters beginning with an at '@' symbol
-    ig_handle_pattern = Pattern(name='Instagram_handle', regex=r'^@[\w]{1,30}\b', score=0.9)
+    ig_handle_pattern = Pattern(name='Instagram_handle', regex=r"\s*(@[\w]{1,30}\b)", score=0.9)
     ig_handle_recognizer = PatternRecognizer(supported_entity='IG_HANDLE', patterns=[ig_handle_pattern])
     
     # Initialize the recognition registry
