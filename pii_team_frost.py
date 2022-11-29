@@ -42,24 +42,30 @@ def find_instagram_handle(text) -> list:
 
 
 def anonymize_pii(text) :
-    SSN_pattern = Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9)
-    SSN_recognizer = PatternRecognizer(supported_entity = 'US_SSN', patterns = [SSN_pattern])
-
-    IG_pattern = Pattern(name = 'IG_pattern', regex = r'(?<!\S)@[\w\d.]{1,30}', score = 0.9)
-    IG_recognizer = PatternRecognizer(supported_entity = 'IG_HANDLE', patterns = [IG_pattern])
+    # dict for patterns and recognizers
+    patterns = {
+        "US_SSN": Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9),
+        "AMEX": Pattern(name = 'AMEX_pattern', regex = r'^3[4]|[7]\d{2}-\d{6}-\d{5}$', score = 0.9),
+        "IG_HANDLE": Pattern(name = 'IG_pattern', regex = r'(?<!\S)@[\w\d.]{1,30}', score = 0.9),
+    }
+    # SSN_pattern = Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9)
+    recognizers = {
+        "SSN_recognizer": PatternRecognizer(supported_entity = 'US_SSN', patterns = [patterns['US_SSN']]),
+        "AMEX_recognizer": PatternRecognizer(supported_entity = 'AMEX', patterns = [patterns['AMEX']]),
+        "IG_recognizer": PatternRecognizer(supported_entity = 'IG_HANDLE', patterns = [patterns['IG_HANDLE']]),
+    }
 
     registry = RecognizerRegistry()
     registry.load_predefined_recognizers()
 
-    #Add Custom Recognizers
-    registry.add_recognizer(SSN_recognizer)
-    registry.add_recognizer(IG_recognizer)
+    for pattern in recognizers:
+        registry.add_recognizer(pattern)
 
     #Setup analyzer with updated recognizer registry
     analyzer = AnalyzerEngine (registry = registry)
 
-    detect_types = ['US_SSN', 'IG_HANDLE']
-    
+    detect_types = ['US_SSN', 'AMEX', 'IG_HANDLE']
+
     results = analyzer.analyze(text = text, entities = detect_types, language = 'en')
 
     # Initialize the engine and anonymize the results

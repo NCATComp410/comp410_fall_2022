@@ -62,16 +62,21 @@ def find_instagram_handle(text) -> list:
 
 
 def anonymize_pii(text):
-    # Create an additional pattern to detect an account number which
-    account_pattern = Pattern(name='account_pattern', regex=r'\d{3,4}-\d{5}', score=0.9)
-    account_recognizer = PatternRecognizer(supported_entity='ACCOUNT_NUMBER', patterns=[account_pattern])
+    # Create an additional pattern to detect an account number
+    amex_pattern = Pattern(name='amex_pattern', regex=r'\d{4}-\d{6}-\d{5}', score=0.9)
+    amex_recognizer = PatternRecognizer(supported_entity='AMEX_NUMBER', patterns=[amex_pattern])
+
+    #Create an additional pattern to detect social media
+    instagram_pattern = Pattern(name='instagram',regex=r'(@[\w]{1,30})',score=0.9)
+    instagram_recognizer = PatternRecognizer(supported_entity='SOCIAL_MEDIA',patterns=[instagram_pattern])
 
     # Initialize the recognition registry
     registry = RecognizerRegistry()
     registry.load_predefined_recognizers()
 
     # Add custom recognizers
-    registry.add_recognizer(account_recognizer)
+    registry.add_recognizer(amex_recognizer)
+    registry.add_recognizer(instagram_recognizer)
 
     # Set up analyzer with our updated recognizer registry
     analyzer = AnalyzerEngine(registry=registry)
@@ -81,7 +86,7 @@ def anonymize_pii(text):
 
     # List of entities to detect
     detect_types = ['US_SSN', 'PHONE_NUMBER', 'EMAIL_ADDRESS', 'PERSON', 'CREDIT_CARD',
-                    'ACCOUNT_NUMBER']
+                    'AMEX_NUMBER','SOCIAL_MEDIA']
 
     results = analyzer.analyze(text=text,
                                entities=detect_types,
