@@ -48,7 +48,7 @@ def anonymize_pii(text) :
         "AMEX": Pattern(name = 'AMEX_pattern', regex = r'^3[4]|[7]\d{2}-\d{6}-\d{5}$', score = 0.9),
         "IG_HANDLE": Pattern(name = 'IG_pattern', regex = r'(?<!\S)@[\w\d.]{1,30}', score = 0.9),
     }
-    # SSN_pattern = Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9)
+
     recognizers = {
         "SSN_recognizer": PatternRecognizer(supported_entity = 'US_SSN', patterns = [patterns['US_SSN']]),
         "AMEX_recognizer": PatternRecognizer(supported_entity = 'AMEX', patterns = [patterns['AMEX']]),
@@ -58,8 +58,8 @@ def anonymize_pii(text) :
     registry = RecognizerRegistry()
     registry.load_predefined_recognizers()
 
-    for pattern in recognizers:
-        registry.add_recognizer(pattern)
+    for recognizer in recognizers.items():
+        registry.add_recognizer(recognizer[1])
 
     #Setup analyzer with updated recognizer registry
     analyzer = AnalyzerEngine (registry = registry)
