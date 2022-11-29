@@ -138,7 +138,14 @@ class TeamFrostTests(unittest.TestCase):
         results_list = find_instagram_handle('My instagram handle is jimjones')
         self.assertEqual(results_list, [])
 
-    def test_replace_email(self):
+
+    def test_replace_name(self):
+        test_str = 'My name is Jane Doe'
+        expected = 'My name is <PERSON>'
+        result = anonymize_pii(test_str)
+        self.assertEqual(expected, result.text)
+        
+   def test_replace_email(self):
         test_str = "My email is je2@edwards.com"
         expected = "My email is <EMAIL_ADDRESS>"
         result = anonymize_pii(test_str)
