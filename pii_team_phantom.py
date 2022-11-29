@@ -44,7 +44,7 @@ def find_instagram_handle(text) -> list:
 
 def anonymize_instagram(text):
     instagram_p = Pattern(name="Instagram",regex=r'(?<!\S)@[\w._]{1,30}',score=0.9)
-    instagram_pattern = ['r@[\w._]{1,30}']
+
 
     instagram_recognizer = PatternRecognizer(supported_entity="INSTAGRAM_HANDLE", supported_language="en", patterns=[instagram_p])
     instagram_recognizer.analyze(text,entities="INSTAGRAM_HANDLE")
