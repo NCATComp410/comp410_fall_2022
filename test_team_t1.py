@@ -165,13 +165,12 @@ class TeamFrostTests(unittest.TestCase):
         expected = 'My credit card number is <CREDIT_CARD>'
         result = anonymize_pii(test_str)
         self.assertEqual(expected, result.text)
-
+        
     def test_replace_email(self):
         test_str = "My email is je2@edwards.com"
         expected = "My email is <EMAIL_ADDRESS>"
         result = anonymize_pii(test_str)
         self.assertEqual(expected, result.text)
-
 
 if __name__ == '__main__':
     unittest.main()
