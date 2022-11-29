@@ -56,6 +56,7 @@ def find_account_number(text):
 
 
 def anonymize_pii(text) :
+    # dict for patterns and recognizers
     patterns = {
         "US_SSN": Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9),
         "AMEX": Pattern(name = 'AMEX_pattern', regex = r'^3[4]|[7]\d{2}-\d{6}-\d{5}$', score = 0.9),
