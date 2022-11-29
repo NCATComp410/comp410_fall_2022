@@ -14,16 +14,6 @@ except OSError:
     nlp = spacy.load("en_core_web_lg")
 
 
-# make sure en_core_web_lg is loaded correctly
-try:
-    nlp = spacy.load("en_core_web_lg")
-except OSError:
-    from spacy.cli import download
-
-    download("en_core_web_lg")
-    nlp = spacy.load("en_core_web_lg")
-    
-
 def find_us_phone_number(text) -> list:
     """Finds all occurrences of a US phone number in a text string"""
     # match a 10 digit phone number with area code
@@ -56,7 +46,7 @@ def find_email(text) -> list:
 
 def find_instagram_handle(text) -> list:
     """Finds all occurrences of an instagram handle in a text string"""
-    rgx_ig = r"\s*(@[\w]{1,30}\b)"
+    rgx_ig = r"(@[\w]{1,30}\b)"
     lst = re.findall(rgx_ig, text)
     return lst
 
@@ -65,10 +55,6 @@ def anonymize_pii(text):
     # an account number is 3 or 4 digits followed by a dash and 5 digits
     account_pattern = Pattern(name='account_pattern', regex=r'\d{3,4}-\d{5}', score=0.9)
     account_recognizer = PatternRecognizer(supported_entity='ACCOUNT_NUMBER', patterns=[account_pattern])
-
-    # an instagram handle is a string of 1 to 30 characters beginning with an at '@' symbol
-    ig_handle_pattern = Pattern(name='Instagram_handle', regex=r"\s*(@[\w]{1,30}\b)", score=0.9)
-    ig_handle_recognizer = PatternRecognizer(supported_entity='IG_HANDLE', patterns=[ig_handle_pattern])
 
     # a credit card is 4 sets of 4 digits seperated by dashes
     credit_pattern = Pattern(name='credit_pattern', regex=r'\d{4}-\d{4}-\d{4}-\d{4}', score=0.9)
@@ -84,7 +70,6 @@ def anonymize_pii(text):
 
     # Add custom recognizers
     registry.add_recognizer(account_recognizer)
-    registry.add_recognizer(ig_handle_recognizer)
     registry.add_recognizer(credit_recognizer)
     registry.add_recognizer(amex_recognizer)
 
@@ -93,7 +78,11 @@ def anonymize_pii(text):
 
     # List of entities to detect
     detect_types = ['US_SSN', 'PHONE_NUMBER', 'EMAIL_ADDRESS', 'PERSON', 'CREDIT_CARD',
+
                     'ACCOUNT_NUMBER', 'IG_HANDLE', 'AMEX_NUMBER']
+
+                    'ACCOUNT_NUMBER']
+
 
     results = analyzer.analyze(text=text,
                                entities=detect_types,
@@ -114,4 +103,3 @@ if __name__ == '__main__':
                         'They provided their ssn 750-12-1234 and phone number 919-555-1212 which were used to verify their account. ' +
                         'They also provided their email address je2@edwards.com and their social medial handle @jon_edwards for future contact. ' +
                         'They would like future charges billed to an amex account 1234-567890-12345'))
-
