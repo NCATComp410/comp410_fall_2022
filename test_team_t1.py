@@ -144,5 +144,14 @@ class TeamFrostTests(unittest.TestCase):
         result = anonymize_pii(test_str)
         self.assertEqual(expected, result.text)
 
+<<<<<<< Updated upstream
+=======
+    def test_replace_credit_card(self):
+        test_str = 'My credit card number is 4095-3434-2424-1414'
+        expected = 'My credit card number is <CREDIT_CARD>'
+        result = anonymize_pii(test_str)
+        self.assertEqual(expected, result.text)
+
+>>>>>>> Stashed changes
 if __name__ == '__main__':
     unittest.main()
