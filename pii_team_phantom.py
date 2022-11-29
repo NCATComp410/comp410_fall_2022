@@ -68,5 +68,5 @@ if __name__ == '__main__':
 + ' They would like future charges billed to an amex account 1234-567890-12345'
     ))
 
-    return re.findall(r'@[\w._]{1,30}',text)
+
 
