@@ -1,40 +1,41 @@
+# -*- coding: utf-8 -*-
 import re
 import spacy
 from presidio_analyzer import AnalyzerEngine, RecognizerRegistry, PatternRecognizer, Pattern
 from presidio_anonymizer import AnonymizerEngine
 
 
-def find_us_phone_number(text) -> list:
+def find_us_phone_number(text):
     """Finds all occurrences of a US phone number in a text string"""
     # match a 10 digit phone number with area code
     return re.findall(r'\d{3}-\d{3}-\d{4}', text)
 
 
-def find_visa_mastercard(text) -> list:
+def find_visa_mastercard(text):
     """Finds all occurrences of a visa / mastercard number in a text string"""
     # match a 16 digit credit card number
     return re.findall(r'\d{4}-\d{4}-\d{4}-\d{4}', text)
 
 # All American Express account numbers must start with “37” or “34”.
-def find_amex(text) -> list:
+def find_amex(text):
     """Finds all occurrences of an amex number in a text string"""
     # match a 15 digit credit card number
-    return re.findall(r'^3[4]|[7]\d{2}-\d{6}-\d{5}$', text)
+    return re.findall(r'\d{4}-\d{6}-\d{5}$', text)
 
 
-def find_us_ssn(text) -> list:
+def find_us_ssn(text):
     """Finds all occurrences of a US social security number in a text string"""
     # match a 9 digit social security number
     return re.findall(r'\d{3}-\d{2}-\d{4}', text)
 
 
-def find_email(text) -> list:
+def find_email(text):
     """Finds all occurrences of an email address in a text string"""
     # match an email address
     return re.findall(r'[\w.\-+]+@(?:[\w-]+\.){1,2}[a-zA-Z]{2,4}$', text)
 
 
-def find_instagram_handle(text) -> list:
+def find_instagram_handle(text):
     """Finds all occurrences of an instagram handle in a text string"""
     # match an instagram handle
     return re.findall(r'(?<!\S)@[\w\d.]{1,30}', text)
@@ -45,10 +46,10 @@ def anonymize_pii(text) :
     # dict for patterns and recognizers
     patterns = {
         "US_SSN": Pattern(name = 'SSN_pattern', regex = r'\d{3}-\d{2}-\d{4}', score = 0.9),
-        "AMEX": Pattern(name = 'AMEX_pattern', regex = r'^3[4]|[7]\d{2}-\d{6}-\d{5}$', score = 0.9),
+        "AMEX": Pattern(name = 'AMEX_pattern', regex = r'\d{4}[\s+, \-]?\d{6}[\s+, \-]?\d{5}$', score = 0.9),
         "IG_HANDLE": Pattern(name = 'IG_pattern', regex = r'(?<!\S)@[\w\d.]{1,30}', score = 0.9),
         "US_PHONE_NUMBER": Pattern(name = 'US_PHONE_NUMBER', regex = r'\d{3}-\d{3}-\d{4}', score = 0.9),
-        "MASTERCARD": Pattern(name='MASTERCARD_pattern', regex = r'^5[1-5][0-9]{14}|^(222[1-9]|22[3-9]\\d|2[3-6]\\d{2}|27[0-1]\\d|2720)[0-9]{12}$', score=0.9)
+        "MASTERCARD": Pattern(name='MASTERCARD_pattern', regex = r'\d{4}[\s+, \-]?\d{4}[\s+, \-]?\d{4}[\s+, \-]?\d{4}', score=0.9)
     }
 
     recognizers = {
