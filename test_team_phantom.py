@@ -1,5 +1,6 @@
 import unittest
 from pii_team_phantom import *
+from presidio_analyzer import AnalyzerEngine
 
 
 class TeamFrostTests(unittest.TestCase):
@@ -27,6 +28,16 @@ class TeamFrostTests(unittest.TestCase):
     def test_find_us_ssn(self):
         results_list = find_us_ssn('My social security number is 123-45-6789')
         self.assertEqual(results_list[0], '123-45-6789')
+
+        analyzer = AnalyzerEngine()
+
+        # Call analyzer to get results
+        results = analyzer.analyze(text="My email address is jim.jones@jones.com",
+                                   entities=["EMAIL_ADDRESS"],
+                                   language='en')
+        print("Check")
+        print(results)
+
 
         #test SSN at the front
         results_list = find_us_ssn('123-45-6789 is my social security number')
@@ -57,6 +68,9 @@ class TeamFrostTests(unittest.TestCase):
         results_list = find_instagram_handle('My instagram handle is @jimjones')
         self.assertEqual(results_list, [])
 
+    def test_instagram_anonymizer(self):
+        results_list = anonymize_instagram('their social medial handle @jon_edwards for future contact.')
+        self.assertEqual(results_list, [])
 
 if __name__ == '__main__':
     unittest.main()
