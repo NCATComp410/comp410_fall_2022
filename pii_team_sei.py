@@ -64,7 +64,7 @@ def find_instagram_handle(text) -> list:
 def anonymize_pii(text):
     # Create an additional pattern to detect an account number
     amex_pattern = Pattern(name='amex_pattern', regex=r'\d{4}-\d{6}-\d{5}', score=0.9)
-    ames_recognizer = PatternRecognizer(supported_entity='AMEX_NUMBER', patterns=[amex_pattern])
+    amex_recognizer = PatternRecognizer(supported_entity='AMEX_NUMBER', patterns=[amex_pattern])
 
     #Create an additional pattern to detect social media
     instagram_pattern = Pattern(name='instagram',regex=r'(@[\w]{1,30})',score=0.9)
