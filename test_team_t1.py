@@ -142,14 +142,14 @@ class TeamFrostTests(unittest.TestCase):
         string = 'My phone number is 336-123-8945'
         convert = 'My phone number is <PHONE_NUMBER>'
         output = anonymize_pii(string)
-        self.assertEqual(convert, output.text)
+        self.assertEqual(convert, output.results)
 
 
     def test_replace_us_ssn(self):
         string = 'My ssn is 123-45-6789'
         convert = 'My ssn is <US_SSN>'
         output = anonymize_pii(string)
-        self.assertEqual(convert, output.text)
+        self.assertEqual(convert, output.results)
 
 
 
