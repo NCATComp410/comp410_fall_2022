@@ -37,7 +37,7 @@ class TeamFrostTests(unittest.TestCase):
 
     def test_find_instagram_handle(self):
         results_list = find_instagram_handle('My instagram handle is @jimjones')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], '@jimjones')
 
 
 if __name__ == '__main__':
