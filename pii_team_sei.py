@@ -68,7 +68,7 @@ def anonymize_pii(text):
 
     #Create an additional pattern to detect social media
     instagram_pattern = Pattern(name='instagram',regex=r'(@[\w]{1,30})',score=0.9)
-    instagram_recognizer = PatternRecognizer(supported_entity='SOCIAL_MEDIA',patterns[instagram_pattern])
+    instagram_recognizer = PatternRecognizer(supported_entity='SOCIAL_MEDIA',patterns=[instagram_pattern])
 
     # Initialize the recognition registry
     registry = RecognizerRegistry()
