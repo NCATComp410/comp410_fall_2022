@@ -2,7 +2,7 @@ import unittest
 from pii_team_sei import *
 
 
-class TeamFrostTests(unittest.TestCase):
+class SEITestCases(unittest.TestCase):
     def test_find_us_phone_number(self):
         results_list = find_us_phone_number('My phone number is 123-456-7890')
         self.assertEqual(results_list[0], '123-456-7890')  # add assertion here
