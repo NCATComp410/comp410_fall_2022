@@ -25,11 +25,11 @@ class TeamFrostTests(unittest.TestCase):
 
     def test_find_amex(self):
         results_list = find_amex('My credit card number is 1234-567890-12345')
-        self.assertEqual(results_list, ['1234-567890-12345'])
+        self.assertEqual(results_list[0], '1234-567890-12345')
 
     def test_find_us_ssn(self):
         results_list = find_us_ssn('My social security number is 123-45-6789')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list[0], '123-45-6789')
 
     def test_find_email(self):
         results_list = find_email('My email address is jim.jones@jones.com')
