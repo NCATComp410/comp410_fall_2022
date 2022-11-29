@@ -77,11 +77,9 @@ def anonymize_pii(text):
     analyzer = AnalyzerEngine(registry=registry)
 
     # List of entities to detect
-    detect_types = ['US_SSN', 'PHONE_NUMBER', 'EMAIL_ADDRESS', 'PERSON', 'CREDIT_CARD',
+    detect_types = ['US_SSN', 'PHONE_NUMBER', 'EMAIL_ADDRESS', 'PERSON', 'CREDIT_CARD', 'ACCOUNT_NUMBER', 'IG_HANDLE', 'AMEX_NUMBER']
 
-                    'ACCOUNT_NUMBER', 'IG_HANDLE', 'AMEX_NUMBER']
-
-                    'ACCOUNT_NUMBER']
+                    
 
 
     results = analyzer.analyze(text=text,
