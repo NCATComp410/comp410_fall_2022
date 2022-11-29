@@ -55,6 +55,7 @@ class TeamFrostTests(unittest.TestCase):
         results_list = find_us_ssn('My social security number is 123-45-6789')
         self.assertEqual(results_list[0], '123-45-6789')
 
+
         analyzer = AnalyzerEngine()
 
         # Call analyzer to get results
@@ -63,6 +64,7 @@ class TeamFrostTests(unittest.TestCase):
                                    language='en')
         print("Check")
         print(results)
+
 
 
         #test SSN at the front
@@ -107,7 +109,6 @@ class TeamFrostTests(unittest.TestCase):
         #invalid handle
         results_list = find_instagram_handle('My instagram handle is @?imjones')
         self.assertFalse(results_list)
-
 
     def test_instagram_anonymizer(self):
         results_list = anonymize_instagram('their social medial handle @jon_edwards for future contact.')

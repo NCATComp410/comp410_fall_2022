@@ -1,5 +1,5 @@
 import unittest
-from pii_detect import find_city_state, find_account_number
+from pii_detect import find_city_state, find_account_number, anonymize_pii
 
 
 class Comp410TestPII(unittest.TestCase):
@@ -51,6 +51,7 @@ class Comp410TestPII(unittest.TestCase):
 
         # Test account number at end of string
         result_list = find_account_number('My account number is 1234567890')
+        self.assertEqual(result_list[0], '1234567890')
 
         # Test multiple account numbers
         result_list = find_account_number('My account numbers are 1234567890 and 0987654321')
@@ -61,6 +62,36 @@ class Comp410TestPII(unittest.TestCase):
         result_list = find_account_number('My account number is 123-456-7890')
         # Dashes are not supported
         self.assertFalse(result_list)
+
+    def test_replace_name(self):
+        test_str = 'My name is John Edwards'
+        expected = 'My name is <PERSON>'
+        result = anonymize_pii(test_str)
+        self.assertEqual(expected, result.text)
+
+    def test_replace_account_number(self):
+        test_str = 'My account numbers are 123-12345 and 1234-12345'
+        expected = 'My account numbers are <ACCOUNT_NUMBER> and <ACCOUNT_NUMBER>'
+        result = anonymize_pii(test_str)
+        self.assertEqual(expected, result.text)
+
+    def test_replace_credit_card(self):
+        test_str = 'My cc is 4095-3434-2424-1414'
+        expected = 'My cc is <CREDIT_CARD>'
+        result = anonymize_pii(test_str)
+        self.assertEqual(expected, result.text)
+
+    def test_replace_nothing(self):
+        test_str = 'I am not going to tell you what my name is'
+        expected = 'I am not going to tell you what my name is'
+        result = anonymize_pii(test_str)
+        self.assertEqual(expected, result.text)
+
+    def test_replace_multiple(self):
+        test_str = '750-12-1234 and 4095-3434-2424-1414 and 919-555-1212'
+        expected = '<US_SSN> and <CREDIT_CARD> and <PHONE_NUMBER>'
+        result = anonymize_pii(test_str)
+        self.assertEqual(expected, result.text)
 
 
 if __name__ == '__main__':

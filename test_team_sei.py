@@ -8,12 +8,24 @@ class TeamFrostTests(unittest.TestCase):
         self.assertEqual(results_list, [])  # add assertion here
 
     def test_find_visa_mastercard(self):
+        #Not matching credit card number
         results_list = find_visa_mastercard('My credit card number is 1234-5678-9012-3456')
         self.assertEqual(results_list, [])
 
+        #Matching Visa credit card number
+        results_list = find_visa_mastercard('My credit card number is 4234-5678-9012-3456')
+        self.assertEqual(results_list[0], '4234-5678-9012-3456')
+
+        #Matching Mastercard credit card number
+        results_list = find_visa_mastercard('My credit card number is 5234-5678-9012-3456')
+        self.assertEqual(results_list[0], '5234-5678-9012-3456')
+
+
+
+
     def test_find_amex(self):
         results_list = find_amex('My credit card number is 1234-567890-12345')
-        self.assertEqual(results_list, [])
+        self.assertEqual(results_list, ['1234-567890-12345'])
 
     def test_find_us_ssn(self):
         results_list = find_us_ssn('My social security number is 123-45-6789')
