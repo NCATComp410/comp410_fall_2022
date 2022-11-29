@@ -161,6 +161,12 @@ class TeamFrostTests(unittest.TestCase):
         expected = 'My credit card number is <CREDIT_CARD>'
         result = anonymize_pii(test_str)
         self.assertEqual(expected, result.text)
+        
+    def test_replace_amex_number(self):
+        test_str = 'My Amex card number is 1234-567890-54321'
+        expected = 'My Amex card number is <AMEX_NUMBER>'
+        result = anonymize_pii(test_str)
+        self.assertEqual(expected, result.text)
 
 if __name__ == '__main__':
     unittest.main()
