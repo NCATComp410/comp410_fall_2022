@@ -69,7 +69,6 @@ def anonymize_pii(text) :
     analyzer = AnalyzerEngine (registry = registry)
 
     detect_types = ['US_SSN', 'AMEX', 'IG_HANDLE', 'US_PHONE_NUMBER', 'MASTERCARD']
-
     results = analyzer.analyze(text = text, entities = detect_types, language = 'en')
 
     # Initialize the engine and anonymize the results
