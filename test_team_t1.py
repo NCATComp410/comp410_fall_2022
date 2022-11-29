@@ -64,7 +64,7 @@ class TeamFrostTests(unittest.TestCase):
 
         #return number from end of string
 
-        
+
         results_list = find_amex('Her card number is 0987-654321-23456')
         self.assertEqual(results_list[0], '0987-654321-23456')
 
@@ -157,6 +157,12 @@ class TeamFrostTests(unittest.TestCase):
     def test_replace_name(self):
         test_str = 'My name is Jane Doe'
         expected = 'My name is <PERSON>'
+        result = anonymize_pii(test_str)
+        self.assertEqual(expected, result.text)
+
+    def test_replace_credit_card(self):
+        test_str = 'My credit card number is 4095-3434-2424-1414'
+        expected = 'My credit card number is <CREDIT_CARD>'
         result = anonymize_pii(test_str)
         self.assertEqual(expected, result.text)
 
