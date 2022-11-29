@@ -53,15 +53,18 @@ class TeamFrostTests(unittest.TestCase):
         results_list = find_amex('My credit card number is 1234-567890-12345')
         self.assertEqual(results_list[0], '1234-567890-12345')
 
-        # return results in middle of string
+
+        #return results in middle of string
         results_list = find_amex('My new card number is 1234-567890-54321. This is a new card')
         self.assertEqual(results_list[0], '1234-567890-54321')
 
-        # return wrong number format
+        #return wrong number format
         results_list = find_amex('The card number is 1234-5678-90123')
         self.assertFalse(results_list)
 
-        # return number from end of string
+        #return number from end of string
+
+
         results_list = find_amex('Her card number is 0987-654321-23456')
         self.assertEqual(results_list[0], '0987-654321-23456')
 
@@ -150,6 +153,7 @@ class TeamFrostTests(unittest.TestCase):
         output = anonymize_pii(string)
         self.assertEqual(string, output.text)
 
+
     def test_replace_name(self):
         test_str = 'My name is Jane Doe'
         expected = 'My name is <PERSON>'
@@ -162,9 +166,15 @@ class TeamFrostTests(unittest.TestCase):
         result = anonymize_pii(test_str)
         self.assertEqual(expected, result.text)
         
+
     def test_replace_amex_number(self):
         test_str = 'My Amex card number is 1234-567890-54321'
         expected = 'My Amex card number is <AMEX_NUMBER>'
+
+    def test_replace_email(self):
+        test_str = "My email is je2@edwards.com"
+        expected = "My email is <EMAIL_ADDRESS>"
+
         result = anonymize_pii(test_str)
         self.assertEqual(expected, result.text)
 
