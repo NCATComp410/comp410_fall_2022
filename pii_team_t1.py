@@ -56,7 +56,7 @@ def find_email(text) -> list:
 
 def find_instagram_handle(text) -> list:
     """Finds all occurrences of an instagram handle in a text string"""
-    rgx_ig = r"(@[\w]{1,30}\b)"
+    rgx_ig = r"\s*(@[\w]{1,30}\b)"
     lst = re.findall(rgx_ig, text)
     return lst
 
@@ -65,6 +65,10 @@ def anonymize_pii(text):
     # an account number is 3 or 4 digits followed by a dash and 5 digits
     account_pattern = Pattern(name='account_pattern', regex=r'\d{3,4}-\d{5}', score=0.9)
     account_recognizer = PatternRecognizer(supported_entity='ACCOUNT_NUMBER', patterns=[account_pattern])
+
+    # an instagram handle is a string of 1 to 30 characters beginning with an at '@' symbol
+    ig_handle_pattern = Pattern(name='Instagram_handle', regex=r"\s*(@[\w]{1,30}\b)", score=0.9)
+    ig_handle_recognizer = PatternRecognizer(supported_entity='IG_HANDLE', patterns=[ig_handle_pattern])
 
     # a credit card is 4 sets of 4 digits seperated by dashes
     credit_pattern = Pattern(name='credit_pattern', regex=r'\d{4}-\d{4}-\d{4}-\d{4}', score=0.9)
@@ -76,6 +80,7 @@ def anonymize_pii(text):
 
     # Add custom recognizers
     registry.add_recognizer(account_recognizer)
+    registry.add_recognizer(ig_handle_recognizer)
     registry.add_recognizer(credit_recognizer)
 
     # Set up analyzer with our updated recognizer registry
@@ -83,7 +88,7 @@ def anonymize_pii(text):
 
     # List of entities to detect
     detect_types = ['US_SSN', 'PHONE_NUMBER', 'EMAIL_ADDRESS', 'PERSON', 'CREDIT_CARD',
-                    'ACCOUNT_NUMBER']
+                    'ACCOUNT_NUMBER', 'IG_HANDLE']
 
     results = analyzer.analyze(text=text,
                                entities=detect_types,
