@@ -44,7 +44,11 @@ def find_email(text) -> list:
 
 def find_instagram_handle(text) -> list:
     """Finds all occurrences of an instagram handle in a text string"""
+<<<<<<< Updated upstream
     rgx_ig = r"(^@[\w]{1,30}\b)"
+=======
+    rgx_ig = r"@[\w]{1,30}\b"
+>>>>>>> Stashed changes
     lst = re.findall(rgx_ig, text)
     return lst
 
