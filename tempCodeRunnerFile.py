@@ -1,4 +1,4 @@
-phone_pattern = Pattern(name='phone_number', regex=r'\d{3}[-\.\s]\d{3}[-\.\s]\d{4}', score=0.9)
+    # phone_pattern = Pattern(name='phone_number', regex=r'\d{3}[-\.\s]\d{3}[-\.\s]\d{4}', score=0.9)
     # phone_recognizer = PatternRecognizer(supported_entity='PHONE_NUMBER', patterns=[phone_pattern])
     # debit_pattern = Pattern(name='debit_pattern', regex=r'\d{4}-\d{4}-\d{4}-\d{4}', score=0.9)
     # debit_recognizer = PatternRecognizer(supported_entity='DEBIT_NUMBER', patterns=[debit_pattern])
