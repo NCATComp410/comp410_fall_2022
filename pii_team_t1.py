@@ -65,7 +65,7 @@ def anonymize_pii(text):
     amex_recognizer = PatternRecognizer(supported_entity='AMEX_NUMBER', patterns=[amex_number_pattern])
     
      # an instagram handle is a string of 1 to 30 characters beginning with an at '@' symbol
-    ig_handle_pattern = Pattern(name='Instagram_handle', regex=r"\s*(@[\w]{1,30}\b)", score=0.9)
+    ig_handle_pattern = Pattern(name='Instagram_handle', regex=r"(@[\w]{1,30}\b)", score=0.9)
     ig_handle_recognizer = PatternRecognizer(supported_entity='IG_HANDLE', patterns=[ig_handle_pattern])
 
     # Initialize the recognition registry
