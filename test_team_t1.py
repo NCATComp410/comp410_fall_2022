@@ -159,6 +159,12 @@ class TeamFrostTests(unittest.TestCase):
         expected = 'My name is <PERSON>'
         result = anonymize_pii(test_str)
         self.assertEqual(expected, result.text)
+        
+    def test_replace_name(self):
+        test_str = 'My instagram is @jane_doe'
+        expected = 'My instagram is <IG_HANDLE>'
+        result = anonymize_pii(test_str)
+        self.assertEqual(expected, result.text)
 
     def test_replace_credit_card(self):
         test_str = 'My credit card number is 4095-3434-2424-1414'
