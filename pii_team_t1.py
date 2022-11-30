@@ -63,6 +63,10 @@ def anonymize_pii(text):
     #an amex card number is a set of 4 digits, 6 digits, and 5 digits, separated by dashes
     amex_number_pattern = Pattern(name='amex_number', regex=r'\d{4}-\d{6}-\d{5}', score=0.9)
     amex_recognizer = PatternRecognizer(supported_entity='AMEX_NUMBER', patterns=[amex_number_pattern])
+    
+     # an instagram handle is a string of 1 to 30 characters beginning with an at '@' symbol
+    ig_handle_pattern = Pattern(name='Instagram_handle', regex=r"\s*(@[\w]{1,30}\b)", score=0.9)
+    ig_handle_recognizer = PatternRecognizer(supported_entity='IG_HANDLE', patterns=[ig_handle_pattern])
 
     # Initialize the recognition registry
     registry = RecognizerRegistry()
@@ -72,6 +76,7 @@ def anonymize_pii(text):
     registry.add_recognizer(account_recognizer)
     registry.add_recognizer(credit_recognizer)
     registry.add_recognizer(amex_recognizer)
+    registry.add_recognizer(ig_handle_recognizer)
 
     # Set up analyzer with our updated recognizer registry
     analyzer = AnalyzerEngine(registry=registry)
